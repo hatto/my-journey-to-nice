@@ -1,0 +1,130 @@
+//Img paths
+@function image-url($image) {
+    @return url("#{$image-path}#{$image}");
+}
+
+//Media queries management
+@mixin respond($min: null, $max: null) {
+	@if ($min != null and $max != null) {
+		@media screen and (min-width: $min) and (max-width: $max - 1) {
+	        @content;
+	    }
+	} @else if ($max != null) {
+		@media screen and (max-width: $max - 1) {
+		    @content;
+		}
+	} @else {
+		@media screen and (min-width: $min) {
+		    @content;
+		}
+	}
+}
+
+@mixin responsive($property, $valueDesktop, $valueTablet, $valueMobile) {
+    @include respond($min: breakpoints(medium)) {
+        #{$property}: $valueDesktop;
+    }
+    @include respond($min: breakpoints(tablet), $max: breakpoints(medium)) {
+        #{$property}: $valueTablet;
+    }
+    @include respond($max: breakpoints(tablet)) {
+        #{$property}: $valueMobile;
+    }
+}
+@mixin max($property, $value) {
+    @include respond($min: breakpoints(desktop)) {
+        #{$property}: $value;
+    }
+}
+
+//Inline block management
+@mixin ib-wrapper($v-align: middle) {
+	font-size: 0;
+	& > * {
+		display: inline-block;
+		vertical-align: $v-align;
+	}
+}
+
+//Clearfix
+@mixin clearfix {
+    *zoom: 1;
+    &:before,
+    &:after {
+        display: table;
+        content: " ";
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/**
+ *  Reset UL or LI element
+ *
+ */
+@mixin listreset {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+}
+.listreset {
+    @include listreset();
+}
+
+
+/**
+ *  Clearfix
+ *
+ */
+.clearfix, .cf {
+  zoom: 1;
+    &:before, &:after { content: ""; display: table; }
+    &:after { clear: both; }
+}
+
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+.clearfix {
+    @include clearfix();
+}
+
+
+@mixin ul-reset() {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin fullSize($size: 0) {
+    position: absolute;
+    top: $size;
+    left: $size;
+    right: $size;
+    bottom: $size;
+}
+
+@mixin placeholder($color) {
+    ::-webkit-input-placeholder {
+      color: #{$color};
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+      color: #{$color};
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+      color: #{$color};
+    }
+
+    :-ms-input-placeholder {
+      color: #{$color};
+    }
+}

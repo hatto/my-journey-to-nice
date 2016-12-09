@@ -1,0 +1,28 @@
+$image-path: '../images/' !default;
+$font-path: '../fonts/' !default;
+
+$colors: (
+	white: 		#ffffff,
+	black:		#000000
+);
+
+@function colors($name) {
+    @return map-get($colors, $name);
+}
+
+
+/**
+ * Breakpoints
+ */
+$breakpoints: (
+	mini:       480px,
+	small:      600px,
+	tablet:     764px,
+	medium:  	1025px,
+	desktop:    1280px,
+	max:    	1700px
+);
+
+@function breakpoints($name) {
+    @return map-get($breakpoints, $name);
+}
