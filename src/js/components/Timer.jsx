@@ -13,10 +13,7 @@ var Timer = React.createClass({
 
     fromNow: function() {
         let duration = moment.duration(finalTime.diff(this.state.currentTime)),
-            timer = ""
-            ;
-
-        let days = duration.asDays(),
+            days = duration.asDays(),
             hours = duration.hours(),
             minutes = duration.minutes(),
             seconds = duration.seconds(),

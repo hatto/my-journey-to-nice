@@ -11,7 +11,8 @@ var vars = { // info about the application
     version: project.version,
     name: project.name,
     env: env,
-    api: project.api[env]
+    strava: project.strava,
+    instagram: project.instagram
 };
 
 module.exports = {
