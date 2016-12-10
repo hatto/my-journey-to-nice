@@ -1,7 +1,7 @@
 import vars             from 'vars';
-import axios            from 'axios';
 import moment           from 'moment';
 import InstagramActions from '../actions/InstagramActions';
+import $                from 'jquery';
 
 var InstagramApi = class {
     constructor() {
@@ -9,25 +9,20 @@ var InstagramApi = class {
     }
 
     getPhotos() {
-      axios.get(this.api.url+'users/self/media/recent/', {
-        params: {
+      var url = this.api.url + "users/self/media/recent";
+      $.ajax({
+        url: url,
+        type: "GET",
+        crossDomain: true,
+        dataType: "jsonp",
+        data: {
           access_token: this.api.accessToken
+        },
+        success: function(response){
+          InstagramActions.success(response.data);
         }
-      })
-      .then(function (response) {
-          console.log(response);
-        //   InstagramActions.success(response.data);
-      })
-      .catch(function (response) {
-        console.log('instagram api error');
-        console.log(response);
-        // ResultsActions.receivedAPIError({
-        //   response: 'some error message'
-        // });
-      })
-      ;
+      });
     }
-
 }
 
 module.exports = new InstagramApi();
