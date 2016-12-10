@@ -33,3 +33,4 @@ node_modules/
 .sass-cache/
 /dist/
 *.log
+api-data.json

@@ -1,11 +1,11 @@
 {
-  "name": "triathlon",
-  "version": "0.0.1",
+  "name": "my-journey-to-nice",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@git.xpfabric.com:mini/business-drive.git"
+    "url": "git@github.com:hatto/my-journey-to-nice.git"
   },
   "scripts": {
     "start": "gulp w",
@@ -76,15 +76,10 @@
   },
   "strava": {
     "url": "https://www.strava.com/api/v3/",
-    "clientId": "15094",
-    "clientSecret": "6ee4d79d1ad758c50f52f17e816cee3633d91ba4",
     "accessToken": "2c0762f9ba6c037b6c5add4aa76c7c3888b32910"
   },
   "instagram": {
     "url": "https://api.instagram.com/v1/",
-    "clientId": "b7946462f67b44acbd52763594de8f3f",
-    "clientSecret": "266f3dd0026c4e44be692dd60f3e239c",
-    "code": "1b32a44d392649eb9f164ab467ec6091",
     "accessToken": "270815471.b794646.3c3a06fccb5e4502bb0610d67244e9a6"
   }
 }
