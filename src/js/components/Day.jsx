@@ -18,6 +18,15 @@ function getStateFromStores() {
     }
 }
 
+function formatTime(time) {
+    time = Math.floor(time/60);
+    let hours = Math.floor(time/60);
+    let mins = time%60;
+    mins = (mins < 10) ? "0"+mins : mins;
+    let timeString = hours + "h" + mins;
+    return timeString;
+}
+
 var Day = React.createClass({
     getInitialState: function() {
         return getStateFromStores();
@@ -74,6 +83,13 @@ var Day = React.createClass({
             'sport__image--' + sport.type.toLowerCase()
         );
         let url = "https://www.strava.com/activities/" + sport.id;
+        let distance = (sport.distance > 0) ? "Distance: " + Math.round(sport.distance/1000,2)+ "km" : null,
+            speed = (sport.average_speed > 0) ? "Speed: " + Math.round((sport.average_speed*3.6),2) + "km/h" : null,
+            watts = (sport.average_watts > 0) ? "Watts: " + sport.average_watts : null,
+            elev = (sport.elev_height > 0) ? "Elevation: " + sport.elev_height + "m" : null,
+            time = formatTime(sport.moving_time)
+            ;
+
         return (
             <div key={ sport.id } className="sport">
                 <div className={ cls }></div>
@@ -83,8 +99,11 @@ var Day = React.createClass({
                         <div className="sport__type">{ sport.type }</div>
                     </div>
                     <div className="sport__description">{ sport.description }</div>
-                    <div className="sport__time">{ sport.moving_time }</div>
-                    <div className="sport__distance">{ Math.round(sport.distance/1000,2) }km</div>
+                    <div className="sport__time">time: { time }</div>
+                    <div className="sport__info">{ distance }</div>
+                    <div className="sport__info">{ speed }</div>
+                    <div className="sport__info">{ watts }</div>
+                    <div className="sport__info">{ elev }</div>
                     <a  className="sport__link" target="_blank" href={ url }>+ details</a>
                 </div>
             </div>
