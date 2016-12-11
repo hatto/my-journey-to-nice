@@ -1,0 +1,24 @@
+.header {
+    position: relative;
+    padding-top: 56.25%;
+    background: image-url('bgr.jpg') no-repeat center center / cover;
+    color: colors(white);
+    font-weight: bold;
+}
+.header__filter {
+    @include fullSize();
+    background: rgba(colors(black), 0.4);
+}
+.header__links {
+    margin-top: 5vh;
+    &-item {
+        height: 5vh;
+        display: inline-block;
+        margin: 0 1vw;
+    }
+    img {
+        display: block;
+        height: 100%;
+        width: auto;
+    }
+}

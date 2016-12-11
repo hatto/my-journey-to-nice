@@ -30,7 +30,17 @@ var Timer = React.createClass({
 
         this.refreshDate();
         return (
-            <div className="timer__clock">{ weeks }{weeksLabel} {days}{daysLabel} {hours}:{minutes}:{seconds} </div>
+            <div className="timer__clock">
+                <span className="timer__clock-weeks">
+                    <strong>{ weeks }</strong>{weeksLabel}
+                </span>
+                <span className="timer__clock-days">
+                    <strong>{ days }</strong>{daysLabel}
+                </span>
+                <span className="timer__clock-hours">
+                    <strong>{hours}:{minutes}</strong>:{seconds}
+                </span>
+            </div>
         );
     },
 
@@ -44,8 +54,22 @@ var Timer = React.createClass({
 
     render: function() {
         return (
-            <div className="timer">
-                { this.fromNow() }
+            <div className="header">
+                <div className="header__filter"></div>
+                <div className="timer">
+                    <h1 className="timer__title">my journey to</h1>
+                    <div className="timer__logo">
+                        <img src="./images/logo.png" className="timer__logo-img" />
+                    </div>
+
+                    { this.fromNow() }
+
+                    <div className="header__links">
+                        <a className="header__links-item" target="_blank" href="https://www.strava.com/athletes/5857494"><img src="./images/logo_strava.svg" /></a>
+                        <a className="header__links-item" target="_blank" href="https://www.instagram.com/peterkracik/"><img src="./images/logo_instagram.svg" /></a>
+                        <a className="header__links-item" target="_blank" href="https://github.com/hatto/my-journey-to-nice"><img src="./images/logo_github.svg" /></a>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -3,7 +3,8 @@ $font-path: '../fonts/' !default;
 
 $colors: (
 	white: 		#ffffff,
-	black:		#000000
+	black:		#000000,
+	red_a:      #e31c37
 );
 
 @function colors($name) {
