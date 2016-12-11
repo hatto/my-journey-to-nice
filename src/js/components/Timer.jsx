@@ -31,7 +31,7 @@ var Timer = React.createClass({
         this.refreshDate();
         return (
             <div className="timer__clock">
-                <span className="timer__clock-weeks">
+                in<span className="timer__clock-weeks">
                     <strong>{ weeks }</strong>{weeksLabel}
                 </span>
                 <span className="timer__clock-days">

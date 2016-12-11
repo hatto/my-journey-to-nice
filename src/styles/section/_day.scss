@@ -1,0 +1,102 @@
+.day {
+    position: relative;
+    margin-top: -50vh;
+}
+.day-photo {
+    position: relative;
+    width: 33%;
+}
+.day-photo__text {
+    position: absolute;
+    right: 0;
+    max-width: 80%;
+    bottom: 2vw;
+    background: rgba(colors(black), 0.7);
+    padding: 1vw;
+    font-size: 1vw;
+    color: colors(white);
+}
+.day-results {
+    position: absolute;
+    bottom: 0;
+    left: 33%;
+    width: 66%;
+    font-size: 0;
+}
+.day-results__title {
+    position: absolute;
+    left: 1px;
+    bottom: calc(100% + 1px);
+    padding: 1vh 2vw;
+    font-size: 2vw;
+    text-transform: uppercase;
+    color: colors(white);
+    background: colors(black);
+}
+.sport {
+    position: relative;
+    display: inline-block;
+    width: 33%;
+    margin-left: 1px;
+    background: colors(white);
+    overflow: hidden;
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+}
+.sport__image {
+    position: absolute;
+    bottom: -2%;
+    left: -2%;
+    width: 50%;
+    height: 50%;
+    opacity: 0.1;
+    &--workout {
+        background: image-url('sport_workout.svg') no-repeat left bottom / contain;
+    }
+    &--virtualride {
+        background: image-url('sport_bike.svg') no-repeat left bottom / contain;
+    }
+    &--ride {
+        background: image-url('sport_bike.svg') no-repeat left bottom / contain;
+    }
+    &--run {
+        background: image-url('sport_run.svg') no-repeat left bottom / contain;
+    }
+    &--swim {
+        background: image-url('sport_swim.svg') no-repeat left bottom / contain;
+    }
+}
+.sport__content {
+    position: absolute;
+    @include fullSize(2vw);
+    font-size: 1vw;
+}
+.sport__header {
+    display: inline-block;
+    padding: 0.5vw 2vw;
+    margin-left: -2vw;
+    margin-bottom: 1vw;
+    line-height: 1;
+    color: colors(white);
+    background: colors(red_a);
+}
+.sport__name {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.sport__type {
+    font-size: 0.8em;
+}
+.sport__link {
+    position: absolute;
+    bottom: 0;
+    right: -2vw;
+    padding: 0.3vw 1vw;
+    text-transform: uppercase;
+    background: colors(black);
+    color: colors(white);
+}

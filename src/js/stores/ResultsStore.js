@@ -57,6 +57,22 @@ function addSport(sport) {
     }
 }
 
+function getByDay(day) {
+    let sportsArr = app.data,
+        yesterday = []
+        ;
+    if (sportsArr.length) {
+        for (let item of sportsArr) {
+            let date = moment(item.start_date);
+            if (day.isSame(date, 'day')) {
+                yesterday.push(item);
+            }
+        }
+    }
+
+    return yesterday;
+}
+
 // Extend Cart Store with EventEmitter to add eventing capabilities
 var ResultsStore = assign({}, EventEmitter.prototype, {
 
@@ -86,6 +102,10 @@ var ResultsStore = assign({}, EventEmitter.prototype, {
 
         retArr = filterByDate(retArr, startDate, endDate);
         return retArr;
+    },
+
+    getDay: function(day) {
+        return getByDay(day);
     },
 
     // Emit Change event

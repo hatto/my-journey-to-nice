@@ -23,6 +23,12 @@ var InstagramStore = assign({}, EventEmitter.prototype, {
         InstagramApi.getPhotos();
     },
 
+    getLastPhoto: function() {
+        if (app.photos.length) {
+            return app.photos[0];
+        }
+        return null;
+    },
 
     // Emit Change event
     emitChange: function() {

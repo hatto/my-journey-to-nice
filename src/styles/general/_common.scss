@@ -5,6 +5,7 @@ body {
     padding: 0;
     font-family: $sans;
     color: colors(black);
+    background: colors(grey_a);
 }
 
 * {
@@ -53,6 +54,7 @@ ul, li {
 }
 
 img {
+    display: block;
     width: 100%;
     height: auto;
 }
