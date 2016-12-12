@@ -1,15 +1,15 @@
-.results-total {
+.week-total {
     margin: 5vw 0;
     position: relative;
 }
-.results-total__intro {
+.week-total__intro {
 
 }
-.results-total__activities {
+.week-total__activities {
     clear: both;
     font-size: 0;
 }
-.results-sport {
+.week-sport {
     position: relative;
     display: inline-block;
     width: calc(25% - 1px);
@@ -46,7 +46,7 @@
     }
 
 }
-.results-sport__content {
+.week-sport__content {
     position: absolute;
     top: 0;
     left: 0;
@@ -55,12 +55,12 @@
     padding: 2vw;
     font-size: 1vw;
 }
-.results-intro__description {
+.week-intro__description {
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 2vw;
 }
-.results-intro {
+.week-intro {
     &__title {
         display: inline-block;
         padding: 0.5vw 1vw;
@@ -91,45 +91,5 @@
             text-align: right;
             color: colors(red_a);
         }
-    }
-}
-.sport-total {
-    &__title {
-        display: inline-block;
-        padding: 0.5vw 2vw;
-        margin-left: -2vw;
-        margin-bottom: 1.5vw;
-        line-height: 1;
-        color: colors(white);
-        background: colors(red_a);
-        font-size: 2vw;
-        text-transform: uppercase;
-    }
-}
-.sport-total__graph {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 40%;
-    opacity: 0.75;
-    &-cursor {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        height: 0;
-        background: colors(red_a);
-        transition: height 0.5s ease;
-    }
-    &-text {
-        position: absolute;
-        bottom: 100%;
-        right: 2vw;
-        line-height: 0.75;
-        font-size: 2vw;
-        text-align: right;
-        font-weight: bold;
-        color: colors(red_a);
     }
 }

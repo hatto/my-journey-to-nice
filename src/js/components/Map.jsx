@@ -97,7 +97,7 @@ var Map = React.createClass({
         if (this.state) {
             return (
                 <div className="wrap">
-                    <div className="map__title">Last route</div>
+                    <div className="map__title">Last route.</div>
                     <div className="map">
                         <div id="map" className="map__placeholder"></div>
                         { this.showPhoto() }

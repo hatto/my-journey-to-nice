@@ -4,6 +4,7 @@ import ResultsStore from '../stores/ResultsStore';
 import moment       from 'moment';
 
 import ResultsTotal from './ResultsTotal.jsx';
+import ResultsWeek  from './ResultsWeek.jsx';
 import Map          from './Map.jsx';
 
 /**
@@ -84,7 +85,7 @@ var Results = React.createClass({
             <div className="results">
                 <ResultsTotal startDate={ dates.min.format("YYYY-MM-DD") } endDate={ dates.max.format("YYYY-MM-DD") } profile={ true } />
                 { map }
-                <ResultsTotal startDate={ dates.currentMin.format("YYYY-MM-DD") } endDate={ dates.currentMax.format("YYYY-MM-DD") } />
+                <ResultsWeek startDate={ "2016-11-28" } endDate={ dates.currentMax.format("YYYY-MM-DD") } />
             </div>
         );
     }

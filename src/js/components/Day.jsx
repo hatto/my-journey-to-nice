@@ -156,7 +156,7 @@ var Day = React.createClass({
                     { this.showPhoto() }
 
                     <div className="day-results">
-                        <div className="day-results__title">Yesterday</div>
+                        <div className="day-results__title">Yesterday.</div>
                         { this.showResults() }
                     </div>
                 </div>
