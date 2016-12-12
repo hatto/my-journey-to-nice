@@ -2,7 +2,7 @@ import React        from 'react';
 import classNames   from 'classnames';
 import moment       from 'moment';
 
-import ProfileStore from '../stores/ProfileStore'
+import ProfileStore from '../stores/ProfileStore';
 
 /**
  * get actual values from the store
@@ -41,10 +41,10 @@ var Profile = React.createClass({
     render: function() {
         let profile = this.state.profile;
         return (
-            <div className="profile">
-                <img src={profile.profile} />
-                <p>{ profile.username }</p>
-            </div>
+            <a className="profile" target="_blank" href="https://www.strava.com/athletes/5857494">
+                <img className="profile__image" src={profile.profile} />
+                <img src="./images/logo_strava-orange.svg" />
+            </a>
         );
     }
 });

@@ -79,9 +79,7 @@ var Results = React.createClass({
         let dates = this.state;
         return (
             <div className="results">
-                <ResultsTotal startDate={ dates.min.format("YYYY-MM-DD") } endDate={ dates.max.format("YYYY-MM-DD") } />
-                { this.addPagination() }
-                <h3>{ dates.currentMin.format("DD/MM/YYYY") } - { dates.currentMax.format("DD/MM/YYYY") }</h3>
+                <ResultsTotal startDate={ dates.min.format("YYYY-MM-DD") } endDate={ dates.max.format("YYYY-MM-DD") } profile={ true } />
                 <ResultsTotal startDate={ dates.currentMin.format("YYYY-MM-DD") } endDate={ dates.currentMax.format("YYYY-MM-DD") } />
             </div>
         );

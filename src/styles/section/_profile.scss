@@ -1,0 +1,12 @@
+.profile {
+    display: inline-block;
+    vertical-align: middle;
+    width: 150px;
+    margin-right: 2vw;
+    margin-bottom: 2vw;
+    text-align: center;
+}
+.profile__image {
+    border-radius: 50%;
+    border: 5px solid colors(orange_a);
+}

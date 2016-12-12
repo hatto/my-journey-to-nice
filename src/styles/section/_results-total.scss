@@ -1,71 +1,133 @@
 .results-total {
+    margin: 5vw 0;
     position: relative;
-    margin: 50vw auto;
-    width: 1px;
-    height: 1px;
-    background: colors(red_a);
+}
+.results-total__intro {
+
+}
+.results-total__activities {
+    clear: both;
+    font-size: 0;
 }
 .results-sport {
-    position: absolute;
-    background: colors(white);
-    &--order-0 {
-        max-width: 300px;
-        width: 25vw;
-    }
-    &--order-1 {
-        max-width: 330px;
-        width: 28vw;
-    }
-    &--order-2 {
-        max-width: 360px;
-        width: 31vw;
-    }
-    &--order-3 {
-        max-width: 400px;
-        width: 34vw;
-    }
-    &:nth-child(1) {
-        bottom: 100%;
-        right: 100%;
-        .results-sport__content {
-            right: 0;
-            bottom: 0;
-            text-align: right;
-        }
-    }
-    &:nth-child(2) {
-        bottom: 100%;
-        left: 100%;
-        .results-sport__content {
-            left: 0;
-            bottom: 0;
-        }
-    }
-    &:nth-child(3) {
-        top: 100%;
-        right: 100%;
-        .results-sport__content {
-            right: 0;
-            top: 0;
-            text-align: right;
-        }
-    }
-    &:nth-child(4) {
-        top: 100%;
-        left: 100%;
-        .results-sport__content {
-            top: 0;
-            left: 0;
-        }
-    }
+    position: relative;
+    display: inline-block;
+    width: calc(25% - 1px);
+    margin-right: 1px;
+    background-color: colors(white);
     &:before {
         content: "";
         display: block;
         padding-top: 100%;
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        background-size: 50% 50%;
+        opacity: 0.1;
     }
+    &--other {
+        &:before {
+            background-image: image-url('sport_workout.svg');
+        }
+    }
+    &--bike {
+        &:before {
+            background-image: image-url('sport_bike.svg');
+        }
+    }
+    &--run {
+        &:before {
+            background-image: image-url('sport_run.svg');
+        }
+    }
+    &--swim {
+        &:before {
+            background-image: image-url('sport_swim.svg');
+        }
+    }
+
 }
 .results-sport__content {
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     padding: 2vw;
-    font-size: 1.5vw;
+    font-size: 1vw;
+}
+.results-intro__description {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 2vw;
+}
+.results-intro {
+    &__title {
+        display: inline-block;
+        padding: 0.5vw 1vw;
+        margin-bottom: 1vw;
+        line-height: 1;
+        font-size: 2vw;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: colors(white);
+        background: colors(black);
+    }
+    &__stats {
+        line-height: 1;
+        font-size: 2vw;
+        font-weight: bold;
+        color: colors(red_a);
+        &-col {
+            display: inline-block;
+            vertical-align: top;
+            margin-right: 2vw;
+        }
+        span {
+            display: inline-block;
+            vertical-align: baseline;
+            width: 150px;
+            font-size: 0.5em;
+            color: colors(black);
+        }
+    }
+}
+.sport-total {
+    &__title {
+        display: inline-block;
+        padding: 0.5vw 2vw;
+        margin-left: -2vw;
+        margin-bottom: 1.5vw;
+        line-height: 1;
+        color: colors(white);
+        background: colors(red_a);
+        font-size: 1.3vw;
+        text-transform: uppercase;
+    }
+}
+.sport-total__graph {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 40%;
+    opacity: 0.75;
+    &-cursor {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 0;
+        background: colors(red_a);
+        transition: height 0.5s ease;
+    }
+    &-text {
+        position: absolute;
+        bottom: 100%;
+        right: 2vw;
+        line-height: 0.75;
+        font-size: 2vw;
+        text-align: right;
+        font-weight: bold;
+        color: colors(red_a);
+    }
 }

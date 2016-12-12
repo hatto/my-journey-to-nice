@@ -19,7 +19,6 @@ var ProfileStore = assign({}, EventEmitter.prototype, {
     },
 
     getProfile: function() {
-        console.log('store: get profile');
         StravaApi.getProfile();
     },
 
