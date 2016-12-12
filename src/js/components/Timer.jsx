@@ -57,7 +57,7 @@ var Timer = React.createClass({
             <div className="header">
                 <div className="header__filter"></div>
                 <div className="timer">
-                    <h1 className="timer__title">my journey to</h1>
+                    <h1 className="timer__title"><strong>#</strong>my journey to</h1>
                     <div className="timer__logo">
                         <img src="./images/logo.png" className="timer__logo-img" />
                     </div>

@@ -1,6 +1,7 @@
 import React        from 'react';
 import classNames   from 'classnames';
 import moment       from 'moment';
+import lodash       from 'lodash';
 import ResultsStore from '../stores/ResultsStore';
 import Profile      from './Profile.jsx';
 
@@ -23,7 +24,7 @@ function getTotalDistance(activities) {
           distance += item.distance;
       }
     }
-    return Math.round(distance/1000, 2);
+    return Math.round(distance/10, 2)/100;
 }
 
 function getTotalTime(activities) {
@@ -93,6 +94,40 @@ var ResultsTotal = React.createClass({
         return activities;
     },
 
+    infoDistance: function(distance) {
+      if (distance > 0) {
+        return <div className="sport-total__distance">distance: { distance }km</div>
+      }
+      return null;
+    },
+
+    infoListTypes: function(activities) {
+      let types = [],
+          rows = []
+          ;
+      if (activities.length) {
+        for (let item in activities) {
+          types.push(item.type);
+        }
+      } else {
+        return null;
+      }
+
+      types = _.uniq(types);
+      for (let item in types) {
+        rows.push(
+          <p className="sport-total__types-item">{ item }</p>
+        );
+      }
+
+      return (
+        <div className="sport-total__types">
+          types:
+          { rows }
+        </div>
+      );
+    },
+
     getSportInfo: function(activity) {
         let sport = activity.activities,
             cls = classNames('results-sport', 'results-sport--' + activity.sport),
@@ -109,7 +144,8 @@ var ResultsTotal = React.createClass({
                             <div className="sport-total__title">{ activity.sport }</div>
                             <div className="sport-total__sessions">sessions: { sport.length }</div>
                             <div className="sport-total__hours">time: { getTimeFormat(activity.duration) }</div>
-                            <div className="sport-total__distance">distance: { getTotalDistance(sport) }</div>
+                            { this.infoDistance(getTotalDistance(sport)) }
+                            { this.infoListTypes(sport) }
                             <div className="sport-total__graph">
                               <div className="sport-total__graph-cursor" style={ style } >
                                 <span className="sport-total__graph-text">{ activity.percentage }%</span>

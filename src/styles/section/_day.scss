@@ -5,6 +5,18 @@
 .day-photo {
     position: relative;
     width: 33%;
+    &:before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+    &__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 }
 .day-photo__text {
     position: absolute;
