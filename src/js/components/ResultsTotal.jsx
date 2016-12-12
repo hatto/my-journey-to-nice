@@ -24,6 +24,10 @@ function getTotalTime(activities) {
     for (let item of activities) {
         time += item.moving_time;
     }
+    return time;
+}
+
+function getTimeFormat(time) {
     time = Math.floor(time/60);
     let hours = Math.floor(time/60);
     let mins = time%60;
@@ -79,29 +83,79 @@ var ResultsTotal = React.createClass({
         return activities;
     },
 
-    getSportInfo: function(sport) {
-        let activities = this.getSportData(sport);
-        if (!activities) {
-            return null;
+    getSportInfo: function(activity) {
+        let sport = activity.activities,
+            cls = classNames('results-sport', 'results-sport--' + activity.sport, 'results-sport--order-' + activity.order)
+            ;
+        if (sport.length) {
+            return (
+                <div className={ cls }>
+                    <div className="results-sport__content">
+                        <div className="sport">
+                            <div className="sport__sessions">sessions: { sport.length }</div>
+                            <div className="sport__hours">time: { getTimeFormat(activity.duration) }</div>
+                            <div className="sport__distance">distance: { getTotalDistance(sport) }</div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+        return null;
+    },
+
+    showSports: function() {
+        let activities = [{
+                activities: this.getSportData('bike'),
+                sport: 'bike',
+                duration: 0,
+                order: 0
+            },
+            {
+                activities: this.getSportData('run'),
+                sport: 'run',
+                duration: 0,
+                order: 0
+            },
+            {
+                activities: this.getSportData('swim'),
+                sport: 'swim',
+                duration: 0,
+                order: 0
+            },
+            {
+                activities: this.getSportData('other'),
+                sport: 'other',
+                duration: 0,
+                order: 0
+            }]
+        ;
+
+        for (let item of activities) {
+            item.duration = getTotalTime(item.activities);
         }
 
-        let cls = classNames('sport', 'sport--'+sport);
+        for (let item1 of activities) {
+            for (let item2 of activities) {
+                if (item1.duration > item2.duration) {
+                    item1.order++;
+                }
+            }
+        }
+        console.log(activities);
         return (
-            <div className="{ cls }">
-                <div className="sport__sessions">sessions: { activities.length }</div>
-                <div className="sport__hours">time: { getTotalTime(activities) }</div>
-                <div className="sport__distance">distance: { getTotalDistance(activities) }</div>
+            <div className="results-total">
+                { this.getSportInfo(activities[0]) }
+                { this.getSportInfo(activities[1]) }
+                { this.getSportInfo(activities[2]) }
+                { this.getSportInfo(activities[3]) }
             </div>
         );
     },
 
     render: function() {
         return (
-            <div className="results-total">
-                <div className="results-total__info results-total__info--bike">bike: { this.getSportInfo('bike') }</div>
-                <div className="results-total__info results-total__info--run">run: { this.getSportInfo('run') }</div>
-                <div className="results-total__info results-total__info--swim">swim: { this.getSportInfo('swim') }</div>
-                <div className="results-total__info results-total__info--other">other: { this.getSportInfo('other') }</div>
+            <div className="wrap">
+                { this.showSports() }
             </div>
         );
     }
