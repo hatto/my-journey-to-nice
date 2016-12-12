@@ -6,5 +6,7 @@ module.exports = keyMirror({
   API_ERROR:                null,
   API_SUCCESS:              null,
   FETCH_PROFILE_SUCCESS:    null,
-  FETCH_PROFILE_ERROR:      null
+  FETCH_PROFILE_ERROR:      null,
+  GMAP_LOADED:              null,
+  FETCHED_ACTIVITY:         null
 });

@@ -15,6 +15,8 @@ var app = {
   bySport: {}
 };
 
+var mapActivity = {};
+
 function storeData(data) {
     app.data = data;
     groupDatasBySport();
@@ -73,6 +75,21 @@ function getByDay(day) {
     return yesterday;
 }
 
+/**
+ * get last item from results with a map
+ * @return {Object}   result object
+ */
+function getLastWithMap() {
+  if (app.data.length) {
+    for (let i=app.data.length-1; i>=0; i--) {
+      if (app.data[i].map.summary_polyline) {
+        return app.data[i];
+      }
+    }
+  }
+  return null;
+}
+
 // Extend Cart Store with EventEmitter to add eventing capabilities
 var ResultsStore = assign({}, EventEmitter.prototype, {
 
@@ -84,8 +101,11 @@ var ResultsStore = assign({}, EventEmitter.prototype, {
         return app;
     },
 
+    getMapState: function() {
+        return mapActivity;
+    },
+
     getResults: function() {
-        console.log('store: get results');
         StravaApi.getData();
     },
 
@@ -138,6 +158,18 @@ AppDispatcher.register(function(action) {
         case Constants.API_SUCCESS:
           storeData(action.value);
 
+          ResultsStore.emitChange();
+          break;
+
+        case Constants.GMAP_LOADED:
+          let activity = getLastWithMap();
+          if (activity) {
+            StravaApi.getActivity(activity.id);
+          }
+          break;
+
+        case Constants.FETCHED_ACTIVITY:
+          mapActivity = action.value;
           ResultsStore.emitChange();
           break;
 

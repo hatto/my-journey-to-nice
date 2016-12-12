@@ -114,9 +114,11 @@ var ResultsTotal = React.createClass({
       }
 
       types = _.uniq(types);
+      let i = 0;
       for (let item in types) {
+        i++;
         rows.push(
-          <p className="sport-total__types-item">{ item }</p>
+          <p key={ i } className="sport-total__types-item">{ item }</p>
         );
       }
 

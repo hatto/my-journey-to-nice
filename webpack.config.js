@@ -12,7 +12,8 @@ var vars = { // info about the application
     name: project.name,
     env: env,
     strava: project.strava,
-    instagram: project.instagram
+    instagram: project.instagram,
+    googlemaps: project.googlemaps
 };
 
 module.exports = {

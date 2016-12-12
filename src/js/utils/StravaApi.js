@@ -30,6 +30,26 @@ var StravaApi = class {
       ;
     }
 
+    getActivity(id) {
+      axios.get(this.api.url+'activities/' + id, {
+        params: {
+          access_token: this.api.accessToken
+        }
+      })
+      .then(function (response) {
+          // console.log(response);
+          ResultsActions.successActivity(response.data);
+      })
+      .catch(function (response) {
+        console.log('error');
+        console.log(response);
+        // ResultsActions.receivedAPIError({
+        //   response: 'some error message'
+        // });
+      })
+      ;
+    }
+
     getProfile() {
       axios.get(this.api.url+'athlete', {
         params: {

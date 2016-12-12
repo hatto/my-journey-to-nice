@@ -3,7 +3,8 @@ import classNames   from 'classnames';
 import ResultsStore from '../stores/ResultsStore';
 import moment       from 'moment';
 
-import ResultsTotal from './ResultsTotal.jsx'
+import ResultsTotal from './ResultsTotal.jsx';
+import Map          from './Map.jsx';
 
 /**
  * get actual values from the store
@@ -77,9 +78,12 @@ var Results = React.createClass({
 
     render: function() {
         let dates = this.state;
+
+        let map = (this.state.data && this.state.data.length) ? <Map /> : null;
         return (
             <div className="results">
                 <ResultsTotal startDate={ dates.min.format("YYYY-MM-DD") } endDate={ dates.max.format("YYYY-MM-DD") } profile={ true } />
+                { map }
                 <ResultsTotal startDate={ dates.currentMin.format("YYYY-MM-DD") } endDate={ dates.currentMax.format("YYYY-MM-DD") } />
             </div>
         );
