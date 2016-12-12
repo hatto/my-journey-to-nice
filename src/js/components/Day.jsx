@@ -116,8 +116,16 @@ var Day = React.createClass({
 
         if (results.length == 0) {
             return (
-                <div className="day-results__empty">
-                    day of repo
+                <div className="day-results__list">
+                    <div className="sport">
+                        <div className="sport__image sport__image--rest"></div>
+                        <div className="sport__content">
+                            <div className="sport__header">
+                                <div className="sport__name">The Rest day</div>
+                                <div className="sport__type">or I was just lazy</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             );
         } else {
@@ -128,7 +136,9 @@ var Day = React.createClass({
 
             let sports = [];
             for (let item of results) {
-                sports.push(this.getSportInfo(item));
+                if (sports.length < 3) {
+                    sports.push(this.getSportInfo(item));
+                }
             }
             return (
                 <div className={ cls }>

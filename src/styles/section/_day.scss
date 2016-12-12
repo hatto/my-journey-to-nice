@@ -68,6 +68,10 @@
     &--swim {
         background: image-url('sport_swim.svg') no-repeat left bottom / contain;
     }
+    &--rest {
+        left: 50%;
+        background: image-url('sport_rest.svg') no-repeat right bottom / contain;
+    }
 }
 .sport__content {
     position: absolute;
