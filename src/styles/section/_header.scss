@@ -6,7 +6,7 @@
     font-weight: bold;
 }
 .header__filter {
-    @include fullSize();
+    @include fullSize(5vw);
     background: rgba(colors(black), 0.4);
 }
 .header__links {

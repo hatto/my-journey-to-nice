@@ -53,9 +53,9 @@ var Instagram = React.createClass({
     },
 
     render: function() {
-      // { this.getPosts() }
         return (
             <div className="instagram">
+                { this.getPosts() }
             </div>
         );
     }

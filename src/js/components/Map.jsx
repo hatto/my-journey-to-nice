@@ -50,7 +50,7 @@ function drawMap(polyline) {
 function getStateFromStores() {
     let state = ResultsStore.getMapState();
     if (state.map) {
-        drawMap(state.map.summary_polyline);
+        drawMap(state.map.polyline);
     }
     return state;
 }

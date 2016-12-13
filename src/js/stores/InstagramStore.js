@@ -11,6 +11,18 @@ var app = {
   photos: {}
 };
 
+function filterPhotos(photos) {
+    let selected = [];
+    if (photos.length) {
+        for (let item of photos) {
+            if (item.caption && item.caption.text.indexOf('myjourneytonice') > -1) {
+                selected.push(item);
+            }
+        }
+    }
+    return selected;
+}
+
 // Extend Cart Store with EventEmitter to add eventing capabilities
 var InstagramStore = assign({}, EventEmitter.prototype, {
 
@@ -52,7 +64,7 @@ AppDispatcher.register(function(action) {
     switch (action.type) {
 
         case Constants.FETCH_PHOTOS_SUCCESS:
-          app.photos = action.value;
+          app.photos = filterPhotos(action.value);
 
           InstagramStore.emitChange();
           break;

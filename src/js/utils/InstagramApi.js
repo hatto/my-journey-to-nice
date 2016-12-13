@@ -16,7 +16,8 @@ var InstagramApi = class {
         crossDomain: true,
         dataType: "jsonp",
         data: {
-          access_token: this.api.accessToken
+          access_token: this.api.accessToken,
+          count: 100
         },
         success: function(response){
           InstagramActions.success(response.data);
