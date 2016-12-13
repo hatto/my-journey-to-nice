@@ -7,7 +7,7 @@
 }
 .header__filter {
     @include fullSize(5vw);
-    background: rgba(colors(black), 0.4);
+    background: rgba(colors(black), 0.5);
 }
 .header__links {
     margin-top: 5vh;
