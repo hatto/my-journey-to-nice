@@ -9,54 +9,79 @@ import StravaApi                from '../utils/StravaApi';
 
 const EventEmitter = require('events').EventEmitter;
 
+const minDate = "2016-11-28",
+    maxDate = "2017-07-22"
+    ;
+
 var app = {
   data: {},
-  sports: [],
-  bySport: {}
+  sports: {},
+  dates: {
+    min: moment("2016-11-28"),
+    max: moment("2017-07-22"),
+    currentMin: moment().day(1),
+    currentMax: moment().day(7)
+  }
 };
 
 var mapActivity = {};
 
 function storeData(data) {
     app.data = data;
-    groupDatasBySport();
 }
 
 function getDataBySport(sport) {
-    return app.bySport[sport];
+    return app.sports[sport];
 }
 
-function groupDatasBySport() {
-    for (let activity of app.data) {
-        addSport(activity.type);
-        app.bySport[activity.type].push(activity);
+function getSports(activities) {
+    let sports = {};
+    if (activities.length) {
+        for (let activity of activities) {
+            switch(activity.type) {
+                case 'Ride':
+                    if (!sports['bike']) { sports['bike'] = []; }
+                    sports['bike'].push(activity);
+                    break;
+
+                case 'VirtualRide':
+                    if (!sports['bike']) { sports['bike'] = []; }
+                    sports['bike'].push(activity);
+                    break;
+
+                case 'Run':
+                    if (!sports['run']) { sports['run'] = []; }
+                    sports['run'].push(activity);
+                    break;
+
+                case 'Swim':
+                    if (!sports['swim']) { sports['swim'] = []; }
+                    sports['swim'].push(activity);
+                    break;
+
+                default:
+                    if (!sports['other']) { sports['other'] = []; }
+                    sports['other'].push(activity);
+                    break;
+            }
+        }
     }
+    return sports;
 }
 
 function filterByDate(activities, startDate, endDate) {
     let newArr = []
         ;
-    for (let item of activities) {
-        let dt = moment(item.start_date);
-        if (dt.isBetween(startDate, endDate, null, '[]')) {
-            newArr.push(item);
+    if (activities.length) {
+        for (let item of activities) {
+            let dt = moment(item.start_date);
+            if (dt.isBetween(startDate, endDate, null, '[]')) {
+                newArr.push(item);
+            }
         }
     }
 
     return newArr;
-}
-
-/**
- * add sport to array of sports, uniq only
- * @param {String} sport    sport type
- */
-function addSport(sport) {
-    let sportsArr = app.sports;
-    sportsArr.push(sport);
-    app.sports = _.uniq(sportsArr);
-    if (!app.bySport[sport]) {
-        app.bySport[sport] = [];
-    }
 }
 
 function getByDay(day) {
@@ -93,8 +118,14 @@ function getLastWithMap() {
 // Extend Cart Store with EventEmitter to add eventing capabilities
 var ResultsStore = assign({}, EventEmitter.prototype, {
 
-    getResultsState: function() {
-        return app;
+    getResultsState: function(startDate, endDate) {
+        let allActivities = filterByDate(app.data, startDate, endDate),
+            sports = getSports(allActivities)
+            ;
+        return {
+            sports: sports,
+            all: allActivities
+        };
     },
 
     getResultsTotalState: function() {
@@ -109,18 +140,8 @@ var ResultsStore = assign({}, EventEmitter.prototype, {
         StravaApi.getData();
     },
 
-    getBySport: function(sports, startDate, endDate) {
-        let retArr = [];
-        if (Array.isArray(sports)) {
-            for (let item of sports) {
-                let activities = getDataBySport(item);
-                retArr = _.merge(retArr, activities);
-            }
-        } else {
-            retArr = getDataBySport(sports);
-        }
-
-        retArr = filterByDate(retArr, startDate, endDate);
+    getBySport: function(sport, startDate, endDate) {
+        let retArr = filterByDate(app.sports[sport], startDate, endDate);
         return retArr;
     },
 

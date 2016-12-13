@@ -2,55 +2,25 @@ import React        from 'react';
 import classNames   from 'classnames';
 import moment       from 'moment';
 import lodash       from 'lodash';
+
 import ResultsStore from '../stores/ResultsStore';
 import Profile      from './Profile.jsx';
+import Format       from '../utils/Format'
 
 var totalDuration = 0;
-
 /**
  * get actual values from the store
  * @param   {Int}   type        direction of the flight 0/1
  * @return  Object              Component state
  */
-function getStateFromStores() {
-    return ResultsStore.getResultsTotalState();
-}
-
-function getTotalDistance(activities) {
-    let distance = 0;
-
-    if (activities.length) {
-      for (let item of activities) {
-          distance += item.distance;
-      }
-    }
-    return Math.round(distance/10, 2)/100;
-}
-
-function getTotalTime(activities) {
-    let time = 0;
-
-    if (activities.length) {
-      for (let item of activities) {
-          time += item.moving_time;
-      }
-    }
-    return time;
-}
-
-function getTimeFormat(time) {
-    time = Math.floor(time/60);
-    let hours = Math.floor(time/60);
-    let mins = time%60;
-    mins = (mins < 10) ? "0"+mins : mins;
-    let timeString = hours + "h" + mins;
-    return timeString;
+function getStateFromStores(startDate, endDate) {
+    return ResultsStore.getResultsState(startDate, endDate);
 }
 
 var ResultsTotal = React.createClass({
 
     getInitialState: function() {
-        return getStateFromStores();
+        return getStateFromStores(this.props.startDate, this.props.endDate);
     },
 
     componentDidMount: function() {
@@ -69,29 +39,7 @@ var ResultsTotal = React.createClass({
      * Event handler for 'change' events coming from the MessageStore
      */
     _onChange: function() {
-        this.setState(getStateFromStores());
-    },
-
-    getSportData: function(sport) {
-        let sportsArr = null;
-        switch(sport) {
-            case 'bike':
-                sportsArr = ['Ride', 'VirtualRide']
-                break;
-            case 'run':
-                sportsArr = ['Run']
-                break;
-            case 'swim':
-                sportsArr = ['Swim']
-                break;
-            case 'other':
-                sportsArr = ['Yoga', 'Workout']
-                break;
-            default:
-                break;
-        }
-        let activities = ResultsStore.getBySport(sportsArr, this.props.startDate, this.props.endDate);
-        return activities;
+        this.setState(getStateFromStores(this.props.startDate, this.props.endDate));
     },
 
     infoDistance: function(distance) {
@@ -106,7 +54,7 @@ var ResultsTotal = React.createClass({
           rows = []
           ;
       if (activities.length) {
-        for (let item in activities) {
+        for (let item of activities) {
           types.push(item.type);
         }
       } else {
@@ -115,7 +63,7 @@ var ResultsTotal = React.createClass({
 
       types = _.uniq(types);
       let i = 0;
-      for (let item in types) {
+      for (let item of types) {
         i++;
         rows.push(
           <p key={ i } className="sport-total__types-item">{ item }</p>
@@ -130,94 +78,89 @@ var ResultsTotal = React.createClass({
       );
     },
 
-    getSportInfo: function(activity) {
-        let sport = activity.activities,
-            cls = classNames('results-sport', 'results-sport--' + activity.sport),
+    getSportInfo: function(sport) {
+        let activities = sport.activities,
+            cls = classNames('results-sport', 'results-sport--' + sport.type),
+            time = (activities) ? Format.getTimeFormat(sport.duration) : 0,
+            sessions = activities.length,
             style = {
-              height: activity.percentage + "%"
+              height: sport.percentage + "%"
             }
             ;
 
-        if (sport.length) {
-            return (
-                <div className={ cls }>
-                    <div className="results-sport__content">
-                        <div className="sport-total">
-                            <div className="sport-total__title">{ activity.sport }</div>
-                            <div className="sport-total__sessions">sessions: { sport.length }</div>
-                            <div className="sport-total__hours">time: { getTimeFormat(activity.duration) }</div>
-                            { this.infoDistance(getTotalDistance(sport)) }
-                            { this.infoListTypes(sport) }
-                            <div className="sport-total__graph">
-                              <div className="sport-total__graph-cursor" style={ style } >
-                                <span className="sport-total__graph-text">{ activity.percentage }%</span>
-                              </div>
-                            </div>
+        return (
+            <div className={ cls }>
+                <div className="results-sport__content">
+                    <div className="sport-total">
+                        <div className="sport-total__title">{ sport.type }</div>
+                        <div className="sport-total__sessions">sessions: { sessions }</div>
+                        <div className="sport-total__hours">time: { time }</div>
+                        { this.infoDistance(Format.getTotalDistance(activities)) }
+                        { this.infoListTypes(activities) }
+                        <div className="sport-total__graph">
+                          <div className="sport-total__graph-cursor" style={ style } >
+                            <span className="sport-total__graph-text">{ sport.percentage }%</span>
+                          </div>
                         </div>
                     </div>
                 </div>
-            );
-        }
-        return null;
-    },
-
-    showSports: function() {
-      let activities = [{
-                activities: this.getSportData('bike'),
-                sport: 'bike',
-                duration: 0,
-                percentage: 0
-            },
-            {
-                activities: this.getSportData('run'),
-                sport: 'run',
-                duration: 0,
-                percentage: 0
-            },
-            {
-                activities: this.getSportData('swim'),
-                sport: 'swim',
-                duration: 0,
-                percentage: 0
-            },
-            {
-                activities: this.getSportData('other'),
-                sport: 'other',
-                duration: 0,
-                percentage: 0
-            }]
-        ;
-
-        totalDuration = 0;
-        for (let item of activities) {
-            item.duration = getTotalTime(item.activities);
-            totalDuration += item.duration;
-        }
-
-        for (let item of activities) {
-          item.percentage = Math.round(item.duration*100/totalDuration);
-        }
-        return (
-            <div className="results-total__activities">
-              { this.getSportInfo(activities[0]) }
-              { this.getSportInfo(activities[1]) }
-              { this.getSportInfo(activities[2]) }
-              { this.getSportInfo(activities[3]) }
             </div>
         );
     },
 
-    showProfile() {
-      if (this.props.profile) {
+    showSports: function() {
+        if (!this.state.sports) {
+          return null;
+        }
+        let sports = [{
+            activities: this.state.sports.bike || [],
+            type: 'bike',
+            duration: 0,
+            percentage: 0
+        },
+        {
+            activities: this.state.sports.run || [],
+            type: 'run',
+            duration: 0,
+            percentage: 0
+        },
+        {
+            activities: this.state.sports.swim || [],
+            type: 'swim',
+            duration: 0,
+            percentage: 0
+        },
+        {
+            activities: this.state.sports.other || [],
+            type: 'other',
+            duration: 0,
+            percentage: 0
+        }]
+        ;
+
+        totalDuration = 0;
+        for (let item of sports) {
+            item.duration = Format.getTotalTime(item.activities);
+            totalDuration += item.duration;
+        }
+
+        for (let item of sports) {
+          item.percentage = (totalDuration > 0) ? Math.round(item.duration*100/totalDuration) : 0;
+        }
+
         return (
-            <Profile />
-        )
-      }
-      return null
+            <div className="results-total__activities">
+              { this.getSportInfo(sports[0]) }
+              { this.getSportInfo(sports[1]) }
+              { this.getSportInfo(sports[2]) }
+              { this.getSportInfo(sports[3]) }
+            </div>
+        );
     },
 
     render: function() {
-        let days = moment().diff(moment(this.props.startDate), 'days')
+        let days = moment().diff(moment(this.props.startDate), 'days'),
+            title = (this.props.type === "all") ? "Until today." : "My week."
             ;
 
         return (
@@ -225,18 +168,16 @@ var ResultsTotal = React.createClass({
               <div className="results-total">
                   <div className="results-total__intro">
 
-                    { this.showProfile() }
-
                     <div className="results-intro__description">
-                      <div className="results-intro__title">Until today.</div>
+                      <div className="results-intro__title">{ title }</div>
                       <div className="results-intro__stats">
                         <div className="results-intro__stats-col">
-                          <div><span>Total days:</span><strong>{days }</strong></div>
-                          <div><span>Total Sessions:</span><strong>{ this.state.data.length }</strong></div>
+                          <div><span>Total days:</span><strong>{ days }</strong></div>
+                          <div><span>Total Sessions:</span><strong>{ this.state.all.length }</strong></div>
                         </div>
                         <div className="results-intro__stats-col">
-                          <div><span>Total time:</span><strong>{ getTimeFormat(getTotalTime(this.state.data)) }</strong></div>
-                          <div><span>Total distance:</span><strong>{ getTotalDistance(this.state.data) }km</strong></div>
+                          <div><span>Total time:</span><strong>{ Format.getTimeFormat(Format.getTotalTime(this.state.all)) }</strong></div>
+                          <div><span>Total distance:</span><strong>{ Format.getTotalDistance(this.state.all) }km</strong></div>
                         </div>
                       </div>
                     </div>

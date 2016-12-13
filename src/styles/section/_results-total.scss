@@ -87,6 +87,8 @@
             width: 150px;
         }
         strong {
+            display: inline-block;
+            width: 40px;
             font-size: 2em;
             text-align: right;
             color: colors(red_a);
