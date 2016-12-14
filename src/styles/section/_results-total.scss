@@ -52,7 +52,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 2vw;
+    padding: 1vw;
     font-size: 1vw;
 }
 .results-intro__description {
@@ -96,16 +96,34 @@
     }
 }
 .sport-total {
+    font-size: 0;
     &__title {
         display: inline-block;
         padding: 0.5vw 2vw;
-        margin-left: -2vw;
+        margin-left: -1vw;
+        margin-top: 1vw;
         margin-bottom: 1.5vw;
         line-height: 1;
         color: colors(white);
         background: colors(red_a);
         font-size: 2vw;
         text-transform: uppercase;
+    }
+    &__label {
+        display: inline-block;
+        padding: 3px 1vw;
+        width: 50%;
+        font-size: 1vw;
+        border-bottom: 1px solid colors(grey_a);
+    }
+    &__value {
+        display: inline-block;
+        width: 50%;
+        padding: 3px 1vw;
+        font-size: 1.2vw;
+        font-weight: bold;
+        text-align: right;
+        border-bottom: 1px solid colors(grey_a);
     }
 }
 .sport-total__graph {
@@ -120,9 +138,11 @@
         left: 0;
         bottom: 0;
         right: 0;
-        height: 0;
         background: colors(red_a);
-        transition: height 0.5s ease;
+        transition: height 1s ease 0.5s;
+        .results-sport:not(.results-sport--shown) & {
+            height: 0 !important;
+        }
     }
     &-text {
         position: absolute;

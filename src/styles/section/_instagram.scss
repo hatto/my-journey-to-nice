@@ -1,4 +1,5 @@
 .instagram {
+    @include clearfix();
     max-width: 1200px;
     margin: 0 auto 10vh;
 }
@@ -19,17 +20,6 @@
     &:before {
         content: "";
         display: block;
-    }
-    &:after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 20px;
-        height: 20px;
-        transform: translate(-50%, -50%) rotate(45deg);
-        background: colors(white);
-
     }
     &:nth-child(6n+1) {
         float: right;
@@ -100,6 +90,22 @@
     left: 0;
     right: 0;
     bottom: 0;
+    opacity: 0;
+    transition: opacity 1s ease 0.5s;
+    &--shown {
+        opacity: 1;
+    }
+    &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%) rotate(45deg);
+        background: colors(white);
+
+    }
 }
 .instagram-post__image {
     position: absolute;
@@ -140,7 +146,7 @@
             background: image-url('quote.svg') no-repeat left top / contain;
         }
         &--small {
-            font-size: 0.75em;
+            font-size: 0.72em;
         }
     }
     strong {

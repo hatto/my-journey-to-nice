@@ -31,7 +31,7 @@ var Format = class {
         let hours = Math.floor(time/60);
         let mins = time%60;
         mins = (mins < 10) ? "0"+mins : mins;
-        let timeString = hours + "h" + mins;
+        let timeString = hours + ":" + mins;
         return timeString;
     }
 }

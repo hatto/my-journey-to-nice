@@ -80,6 +80,9 @@
     &--swim {
         background: image-url('sport_swim.svg') no-repeat left bottom / contain;
     }
+    &--yoga {
+        background: image-url('sport_yoga.svg') no-repeat left bottom / contain;
+    }
     &--rest {
         left: 50%;
         background: image-url('sport_rest.svg') no-repeat right bottom / contain;
@@ -87,13 +90,13 @@
 }
 .sport__content {
     position: absolute;
-    @include fullSize(2vw);
+    @include fullSize(1vw);
     font-size: 1vw;
 }
 .sport__header {
     display: inline-block;
     padding: 0.5vw 2vw;
-    margin-left: -2vw;
+    margin-left: -1vw;
     margin-bottom: 1vw;
     line-height: 1;
     color: colors(white);
@@ -110,9 +113,28 @@
 .sport__link {
     position: absolute;
     bottom: 0;
-    right: -2vw;
+    right: -1vw;
     padding: 0.3vw 1vw;
     text-transform: uppercase;
     background: colors(black);
     color: colors(white);
+}
+.sport__info {
+    font-size: 0;
+    &-label {
+        display: inline-block;
+        padding: 3px 1vw;
+        width: 50%;
+        font-size: 1vw;
+        border-bottom: 1px solid colors(grey_a);
+    }
+    &-value {
+        display: inline-block;
+        width: 50%;
+        padding: 3px 1vw;
+        font-size: 1.2vw;
+        font-weight: bold;
+        text-align: right;
+        border-bottom: 1px solid colors(grey_a);
+    }
 }

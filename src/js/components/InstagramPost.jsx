@@ -1,5 +1,6 @@
 import React        from 'react';
 import classNames   from 'classnames';
+import Waypoint     from 'react-waypoint';
 
 /**
  * get actual values from the store
@@ -7,6 +8,12 @@ import classNames   from 'classnames';
  * @return  Object              Component state
  */
 var InstagramPost = React.createClass({
+
+    getInitialState: function() {
+        return {
+            shown: false
+        };
+    },
 
     highlightHashtags: function(text) {
         return this.nl2br(text.replace(/(^|\s)(#[a-z\d-]+)/ig, "$1<strong>$2</strong>"));
@@ -33,10 +40,25 @@ var InstagramPost = React.createClass({
         return null;
     },
 
+    _handleWaypointEnter: function() {
+        this.setState({
+            shown: true
+        });
+    },
+
     render: function() {
-        let photo = this.props.data;
+        let photo = this.props.data,
+            cls = classNames({
+                'instagram-post': true,
+                'instagram-post--shown': this.state.shown
+            })
+            ;
+
         return (
-            <div className="instagram-post">
+            <div className={ cls }>
+                <Waypoint
+                    onEnter={this._handleWaypointEnter}
+                />
                 <div className="instagram-post__image">
                     <img
                         src={ photo.images.standard_resolution.url }

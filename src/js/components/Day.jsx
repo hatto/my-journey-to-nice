@@ -2,8 +2,9 @@ import React        from 'react';
 import classNames   from 'classnames';
 import moment       from 'moment';
 
-import InstagramStore from '../stores/InstagramStore';
-import ResultsStore from '../stores/ResultsStore';
+import InstagramStore   from '../stores/InstagramStore';
+import ResultsStore     from '../stores/ResultsStore';
+import Format           from '../utils/Format';
 
 /**
  * get actual values from the store
@@ -11,20 +12,11 @@ import ResultsStore from '../stores/ResultsStore';
  * @return  Object              Component state
  */
 function getStateFromStores() {
-    let yesterday = moment().subtract('1', 'days');
+    let yesterday = moment().subtract('2', 'days');
     return {
         day: ResultsStore.getDay(yesterday),
         photo: InstagramStore.getLastPhoto()
     }
-}
-
-function formatTime(time) {
-    time = Math.floor(time/60);
-    let hours = Math.floor(time/60);
-    let mins = time%60;
-    mins = (mins < 10) ? "0"+mins : mins;
-    let timeString = hours + "h" + mins;
-    return timeString;
 }
 
 var Day = React.createClass({
@@ -77,17 +69,26 @@ var Day = React.createClass({
         return null;
     },
 
+    getSportInfoRow: function(info, label) {
+        if (info == null || info == 0) {
+            return null;
+        }
+        return (
+            <div className="sport__info">
+                <span className='sport__info-label'>{ label }:</span>
+                <span className='sport__info-value'>{ info }</span>
+            </div>
+        );
+    },
     getSportInfo: function(sport) {
         let cls = classNames(
             'sport__image',
             'sport__image--' + sport.type.toLowerCase()
         );
-        let url = "https://www.strava.com/activities/" + sport.id;
-        let distance = (sport.distance > 0) ? "Distance: " + Math.round(sport.distance/1000,2)+ "km" : null,
-            speed = (sport.average_speed > 0) ? "Speed: " + Math.round((sport.average_speed*3.6),2) + "km/h" : null,
-            watts = (sport.average_watts > 0) ? "Watts: " + sport.average_watts : null,
-            elev = (sport.elev_height > 0) ? "Elevation: " + sport.elev_height + "m" : null,
-            time = formatTime(sport.moving_time)
+        let url = "https://www.strava.com/activities/" + sport.id,
+            distance = (sport.distance > 0) ? Math.round(sport.distance/1000,2) : null,
+            speed = (sport.average_speed > 0) ? Math.round((sport.average_speed*3.6),2) : null,
+            time = Format.getTimeFormat(sport.moving_time)
             ;
 
         return (
@@ -99,11 +100,11 @@ var Day = React.createClass({
                         <div className="sport__type">{ sport.type }</div>
                     </div>
                     <div className="sport__description">{ sport.description }</div>
-                    <div className="sport__time">time: { time }</div>
-                    <div className="sport__info">{ distance }</div>
-                    <div className="sport__info">{ speed }</div>
-                    <div className="sport__info">{ watts }</div>
-                    <div className="sport__info">{ elev }</div>
+                    { this.getSportInfoRow(time, 'Time') }
+                    { this.getSportInfoRow(distance, 'Distance') }
+                    { this.getSportInfoRow(speed, 'Speed') }
+                    { this.getSportInfoRow(sport.average_watts, 'Watts') }
+                    { this.getSportInfoRow(sport.elev_height, 'Elevation') }
                     <a  className="sport__link" target="_blank" href={ url }>+ details</a>
                 </div>
             </div>

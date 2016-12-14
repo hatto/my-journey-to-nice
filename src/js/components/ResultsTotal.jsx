@@ -2,10 +2,11 @@ import React        from 'react';
 import classNames   from 'classnames';
 import moment       from 'moment';
 import lodash       from 'lodash';
+import Waypoint     from 'react-waypoint';
 
 import ResultsStore from '../stores/ResultsStore';
 import Profile      from './Profile.jsx';
-import Format       from '../utils/Format'
+import Format       from '../utils/Format';
 
 var totalDuration = 0;
 /**
@@ -44,7 +45,12 @@ var ResultsTotal = React.createClass({
 
     infoDistance: function(distance) {
       if (distance > 0) {
-        return <div className="sport-total__distance">distance: { distance }km</div>
+        return (
+            <div className="sport-total__distance">
+                <span className="sport-total__label">distance:</span>
+                <span className="sport-total__value">{ distance }km</span>
+            </div>
+        );
       }
       return null;
     },
@@ -72,15 +78,21 @@ var ResultsTotal = React.createClass({
 
       return (
         <div className="sport-total__types">
-          types:
-          { rows }
+            <span className="sport-total__label">types:</span>
+            { rows }
         </div>
       );
     },
 
+    _handleWaypointEnter: function() {
+        this.setState({
+            shown: true
+        });
+    },
+
     getSportInfo: function(sport) {
         let activities = sport.activities,
-            cls = classNames('results-sport', 'results-sport--' + sport.type),
+            cls = classNames('results-sport', 'results-sport--' + sport.type, { 'results-sport--shown': this.state.shown}),
             time = (activities) ? Format.getTimeFormat(sport.duration) : 0,
             sessions = activities.length,
             style = {
@@ -90,13 +102,21 @@ var ResultsTotal = React.createClass({
 
         return (
             <div className={ cls }>
+                <Waypoint
+                    onEnter={this._handleWaypointEnter}
+                />
                 <div className="results-sport__content">
                     <div className="sport-total">
                         <div className="sport-total__title">{ sport.type }</div>
-                        <div className="sport-total__sessions">sessions: { sessions }</div>
-                        <div className="sport-total__hours">time: { time }</div>
+                        <div className="sport-total__sessions">
+                            <span className="sport-total__label">sessions:</span>
+                            <span className="sport-total__value">{ sessions }</span>
+                        </div>
+                        <div className="sport-total__hours">
+                            <span className="sport-total__label">time:</span>
+                            <span className="sport-total__value">{ time }</span>
+                        </div>
                         { this.infoDistance(Format.getTotalDistance(activities)) }
-                        { this.infoListTypes(activities) }
                         <div className="sport-total__graph">
                           <div className="sport-total__graph-cursor" style={ style } >
                             <span className="sport-total__graph-text">{ sport.percentage }%</span>
