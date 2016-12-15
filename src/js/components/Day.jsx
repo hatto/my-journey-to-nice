@@ -12,7 +12,7 @@ import Format           from '../utils/Format';
  * @return  Object              Component state
  */
 function getStateFromStores() {
-    let yesterday = moment().subtract('2', 'days');
+    let yesterday = moment().subtract('1', 'days');
     return {
         day: ResultsStore.getDay(yesterday),
         photo: InstagramStore.getLastPhoto()
