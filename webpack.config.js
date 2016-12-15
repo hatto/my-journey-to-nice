@@ -13,7 +13,8 @@ var vars = { // info about the application
     env: env,
     strava: project.strava,
     instagram: project.instagram,
-    googlemaps: project.googlemaps
+    googlemaps: project.googlemaps,
+    ga: project.analytics.code
 };
 
 module.exports = {

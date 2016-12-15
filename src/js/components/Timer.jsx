@@ -1,6 +1,7 @@
 import React        from 'react';
 import classNames   from 'classnames';
 import moment       from 'moment';
+import ReactGA      from 'react-ga';
 
 var finalTime = moment("2017-07-23 6:30", "YYYY-MM-DD HH:mm");
 
@@ -52,6 +53,14 @@ var Timer = React.createClass({
         }, 1000);
     },
 
+    clickHandler(eventLabel) {
+        ReactGA.event({
+          category: 'links',
+          action: 'click link',
+          label: eventLabel
+        });
+    },
+
     render: function() {
         return (
             <div className="header">
@@ -65,9 +74,27 @@ var Timer = React.createClass({
                     { this.fromNow() }
 
                     <div className="header__links">
-                        <a className="header__links-item" target="_blank" href="https://www.strava.com/athletes/5857494"><img src="./images/logo_strava.svg" /></a>
-                        <a className="header__links-item" target="_blank" href="https://www.instagram.com/peterkracik/"><img src="./images/logo_instagram.svg" /></a>
-                        <a className="header__links-item" target="_blank" href="https://github.com/hatto/my-journey-to-nice"><img src="./images/logo_github.svg" /></a>
+                        <a
+                            className="header__links-item"
+                            onClick={() => {this.clickHandler('strava')}}
+                            target="_blank"
+                            href="https://www.strava.com/athletes/5857494">
+                                <img src="./images/logo_strava.svg" />
+                        </a>
+                        <a
+                            className="header__links-item"
+                            onClick={() => {this.clickHandler('instagram')}}
+                            target="_blank"
+                            href="https://www.instagram.com/peterkracik/">
+                                <img src="./images/logo_instagram.svg" />
+                        </a>
+                        <a
+                            className="header__links-item"
+                            onClick={() => {this.clickHandler('github')}}
+                            target="_blank"
+                            href="https://github.com/hatto/my-journey-to-nice">
+                                <img src="./images/logo_github.svg" />
+                        </a>
                     </div>
                 </div>
             </div>

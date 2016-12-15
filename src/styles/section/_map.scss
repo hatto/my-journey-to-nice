@@ -6,13 +6,7 @@
     }
 }
 .map__title {
-    display: inline-block;
-    margin-bottom: 1px;
-    padding: 1vh 2vw;
-    font-size: 2vw;
-    text-transform: uppercase;
-    color: colors(white);
-    background: colors(black);
+    @extend %title;
 }
 .map__image {
     position: absolute;

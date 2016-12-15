@@ -12,8 +12,9 @@
 .results-sport {
     position: relative;
     display: inline-block;
-    width: calc(25% - 1px);
-    margin-right: 1px;
+    @include responsive(width, calc(25% - 1px), calc(50% - 1px), 100%);
+    @include responsive(margin-right, 1px, 1px, 0);
+    margin-bottom: 1px;
     background-color: colors(white);
     &:before {
         content: "";
@@ -52,8 +53,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 1vw;
-    font-size: 1vw;
+    @include responsive(padding, 1vw, 2vw, 4vw);
+    @include responsive(font-size, 1vw, 1.5vw, 3vw);
 }
 .results-intro__description {
     display: inline-block;
@@ -62,20 +63,13 @@
 }
 .results-intro {
     &__title {
-        display: inline-block;
-        padding: 0.5vw 1vw;
-        margin-bottom: 1vw;
-        line-height: 1;
-        font-size: 2vw;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: colors(white);
-        background: colors(black);
+        @extend %title;
     }
     &__stats {
         line-height: 1;
-        font-size: 1vw;
+        @include responsive(font-size, 1vw, 1.5vw, 3vw);
         font-weight: bold;
+        margin: 2vh 0;
         &-col {
             display: inline-block;
             vertical-align: top;
@@ -88,7 +82,6 @@
         }
         strong {
             display: inline-block;
-            width: 40px;
             font-size: 2em;
             text-align: right;
             color: colors(red_a);
@@ -99,28 +92,28 @@
     font-size: 0;
     &__title {
         display: inline-block;
-        padding: 0.5vw 2vw;
-        margin-left: -1vw;
+        @include responsive(padding, 0.5vw 2vw, 1vw 3vw, 1.5vw 4vw);
+        @include responsive(margin-left, -1vw, -2vw, -4vw);
         margin-top: 1vw;
-        margin-bottom: 1.5vw;
+        @include responsive(margin-bottom, 1.5vw, 2vw, 3vw);
         line-height: 1;
         color: colors(white);
         background: colors(red_a);
-        font-size: 2vw;
+        @include responsive(font-size, 2vw, 26px, 26px);
         text-transform: uppercase;
     }
     &__label {
         display: inline-block;
         padding: 3px 1vw;
         width: 50%;
-        font-size: 1vw;
+        @include responsive(font-size, 1vw, 1.5vw, 4.5vw);
         border-bottom: 1px solid colors(grey_a);
     }
     &__value {
         display: inline-block;
         width: 50%;
         padding: 3px 1vw;
-        font-size: 1.2vw;
+        @include responsive(font-size, 1.2vw, 1.7vw, 4.7vw);
         font-weight: bold;
         text-align: right;
         border-bottom: 1px solid colors(grey_a);
@@ -149,7 +142,7 @@
         bottom: 100%;
         right: 2vw;
         line-height: 0.75;
-        font-size: 2vw;
+        @include responsive(font-size, 2vw, 40px, 30px);
         text-align: right;
         font-weight: bold;
         color: colors(red_a);

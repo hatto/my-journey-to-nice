@@ -1,6 +1,7 @@
 import assign                   from 'object-assign';
 import lodash                   from 'lodash';
 import moment                   from 'moment';
+
 import AppDispatcher            from '../dispatcher/AppDispatcher';
 import Constants                from '../constants/Constants';
 import ResultsActions           from '../actions/ResultsActions';

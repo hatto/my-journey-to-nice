@@ -1,10 +1,13 @@
 .day {
     position: relative;
-    margin-top: -5vh;
+    @include responsive(margin-top, -5vh, 5vh, 5vh);
 }
 .day-photo {
     position: relative;
-    width: 33%;
+    @include responsive(display, inline-block, inline-block, block);
+    vertical-align: top;
+    @include responsive(width, 33%, 33%, 100%);
+    @include responsive(margin-bottom, null, null, 10px);
     &:before {
         content: "";
         display: block;
@@ -21,35 +24,46 @@
 .day-photo__text {
     position: absolute;
     right: 0;
-    max-width: 80%;
-    bottom: 2vw;
+    @include responsive(max-width, 80%, 100%, 100%);
+    @include responsive(bottom, 2vw, 0, 0);
     background: rgba(colors(black), 0.7);
     padding: 1vw;
-    font-size: 1vw;
+    @include responsive(font-size, 1vw, 14px, 12px);
     color: colors(white);
 }
 .day-results {
-    position: absolute;
-    bottom: 0;
-    left: 33%;
-    width: 66%;
     font-size: 0;
+    @include responsive(width, 66%, 66%, 100%);
+    @include respond($min: breakpoints(medium)) {
+        position: absolute;
+        bottom: 0;
+        left: 33%;
+    }
+    @include respond($max: breakpoints(medium)) {
+        position: relative;
+        top: 0;
+        display: inline-block;
+        vertical-align: top;
+    }
 }
 .day-results__title {
-    position: absolute;
-    left: 1px;
-    bottom: calc(100% + 1px);
-    padding: 1vh 2vw;
-    font-size: 2vw;
-    text-transform: uppercase;
-    color: colors(white);
-    background: colors(black);
+    @extend %title;
+    @include respond($min: breakpoints(medium)) {
+        position: absolute;
+        left: 1px;
+        bottom: calc(100% + 1px);
+    }
+    @include respond($max: breakpoints(medium)) {
+        display: inline-block;
+        margin-left: 1px;
+    }
 }
 .sport {
     position: relative;
     display: inline-block;
-    width: 33%;
+    @include responsive(width, 33%, 49%, 100%);
     margin-left: 1px;
+    margin-bottom: 1px;
     background: colors(white);
     overflow: hidden;
     &:before {
@@ -90,30 +104,42 @@
 }
 .sport__content {
     position: absolute;
-    @include fullSize(1vw);
-    font-size: 1vw;
+    @include responsive(font-size, 1vw, 14px, 12px);
+    @include respond($min: breakpoints(medium)) {
+        @include fullSize(1vw);
+    }
+    @include respond($max: breakpoints(medium), $min: breakpoints(tablet)) {
+        @include fullSize(2vw);
+    }
+    @include respond($max: breakpoints(tablet)) {
+        @include fullSize(2vw);
+    }
 }
 .sport__header {
-    display: inline-block;
-    padding: 0.5vw 2vw;
-    margin-left: -1vw;
     margin-bottom: 1vw;
+    display: inline-block;
+    @include responsive(padding, 0.5vw 2vw, 1vw 3vw, 1.5vw 4vw);
+    @include responsive(margin-left, -1vw, -2vw, -4vw);
+    margin-top: 1vw;
+    @include responsive(margin-bottom, 1.5vw, 2vw, 3vw);
     line-height: 1;
     color: colors(white);
     background: colors(red_a);
+    @include responsive(font-size, 2vw, 20px, 26px);
+    text-transform: uppercase;
 }
 .sport__name {
-    font-size: 1.3em;
+    font-size: 1em;
     font-weight: bold;
     text-transform: uppercase;
 }
 .sport__type {
-    font-size: 0.8em;
+    font-size: 0.5em;
 }
 .sport__link {
     position: absolute;
     bottom: 0;
-    right: -1vw;
+    @include responsive(right, -1vw, -2vw, -2vw);
     padding: 0.3vw 1vw;
     text-transform: uppercase;
     background: colors(black);
@@ -125,14 +151,14 @@
         display: inline-block;
         padding: 3px 1vw;
         width: 50%;
-        font-size: 1vw;
+        @include responsive(font-size, 1vw, 12px, 14px);
         border-bottom: 1px solid colors(grey_a);
     }
     &-value {
         display: inline-block;
         width: 50%;
         padding: 3px 1vw;
-        font-size: 1.2vw;
+        @include responsive(font-size, 1.2vw, 14px, 16px);
         font-weight: bold;
         text-align: right;
         border-bottom: 1px solid colors(grey_a);

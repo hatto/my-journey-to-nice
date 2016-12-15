@@ -3,12 +3,14 @@ import classNames   from 'classnames';
 import moment       from 'moment';
 import lodash       from 'lodash';
 import Waypoint     from 'react-waypoint';
+import ReactGA      from 'react-ga';
 
 import ResultsStore from '../stores/ResultsStore';
 import Profile      from './Profile.jsx';
 import Format       from '../utils/Format';
 
 var totalDuration = 0;
+var sentEvent = false;
 /**
  * get actual values from the store
  * @param   {Int}   type        direction of the flight 0/1
@@ -85,6 +87,7 @@ var ResultsTotal = React.createClass({
     },
 
     _handleWaypointEnter: function() {
+        this.gaEvent(this.props.type);
         this.setState({
             shown: true
         });
@@ -176,6 +179,17 @@ var ResultsTotal = React.createClass({
               { this.getSportInfo(sports[3]) }
             </div>
         );
+    },
+
+    gaEvent(eventLabel) {
+        if (!sentEvent) {
+            ReactGA.event({
+              category: 'section',
+              action: 'scrolled to section',
+              label: eventLabel
+            });
+            sentEvent = true;
+        }
     },
 
     render: function() {

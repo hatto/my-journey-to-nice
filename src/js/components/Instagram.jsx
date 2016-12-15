@@ -1,7 +1,8 @@
-import React        from 'react';
-import classNames   from 'classnames';
-import moment       from 'moment';
-import Masonry      from 'react-masonry-component';
+import React            from 'react';
+import classNames       from 'classnames';
+import moment           from 'moment';
+import Waypoint         from 'react-waypoint';
+import ReactGA          from 'react-ga';
 
 import InstagramStore   from '../stores/InstagramStore';
 import InstagramPost    from './InstagramPost.jsx';
@@ -9,6 +10,7 @@ import InstagramPost    from './InstagramPost.jsx';
 var masonryOptions = {
     transitionDuration: 0
 };
+var sentEvent = false;
 
 /**
  * get actual values from the store
@@ -74,9 +76,27 @@ var Instagram = React.createClass({
         return null;
     },
 
+    _handleWaypointEnter: function() {
+        this.gaEvent('instagram');
+    },
+
+    gaEvent(eventLabel) {
+        if (!sentEvent) {
+            ReactGA.event({
+              category: 'section',
+              action: 'scrolled to section',
+              label: eventLabel
+            });
+            sentEvent = true;
+        }
+    },
+
     render: function() {
         return (
             <div className="wrap">
+                <Waypoint
+                    onEnter={this._handleWaypointEnter}
+                />
                 <div className="instagram">
                     <p className="instagram__title">From my instagram.</p>
                     <div className="instagram__wrap">

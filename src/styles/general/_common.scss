@@ -58,3 +58,13 @@ img {
     width: 100%;
     height: auto;
 }
+
+%title {
+    @include responsive(margin, 0 0 1px, 30px 0 1px, 20px 0 1px);
+    padding: 1vh 2vw;
+    @include responsive(font-size, 2vw, 30px, 26px);
+    text-transform: uppercase;
+    color: colors(white);
+    background: colors(black);
+    display: inline-block;
+}

@@ -4,7 +4,6 @@ import ResultsStore from '../stores/ResultsStore';
 import moment       from 'moment';
 
 import ResultsTotal from './ResultsTotal.jsx';
-import ResultsWeek  from './ResultsWeek.jsx';
 import Map          from './Map.jsx';
 
 

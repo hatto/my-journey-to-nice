@@ -1,6 +1,6 @@
 .wrap {
     position: relative;
-    max-width: 1600px;
+    @include responsive(max-width, 1600px, 900px, 500px);
     width: 100%;
     margin: 0 auto;
     @include responsive(padding, 0 3vw, 0 3vw, 0 3vw);

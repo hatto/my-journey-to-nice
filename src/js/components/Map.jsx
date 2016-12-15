@@ -1,10 +1,13 @@
 import React            from 'react';
 import classNames       from 'classnames';
 import vars             from 'vars';
+import Waypoint         from 'react-waypoint';
+import ReactGA          from 'react-ga';
 
 import ResultsStore     from '../stores/ResultsStore';
 import ResultsAction    from '../actions/ResultsActions';
 
+var sentEvent = false;
 
 function loadGoogleMapsApi() {
     const script = document.createElement("script");
@@ -93,10 +96,28 @@ var Map = React.createClass({
         return null;
     },
 
+    _handleWaypointEnter: function() {
+        this.gaEvent('map');
+    },
+
+    gaEvent(eventLabel) {
+        if (!sentEvent) {
+            ReactGA.event({
+                category: 'section',
+                action: 'scrolled to section',
+                label: eventLabel
+            });
+            sentEvent = true;
+        }
+    },
+
     render: function() {
         if (this.state) {
             return (
                 <div className="wrap">
+                    <Waypoint
+                        onEnter={this._handleWaypointEnter}
+                    />
                     <div className="map__title">Last route.</div>
                     <div className="map">
                         <div id="map" className="map__placeholder"></div>

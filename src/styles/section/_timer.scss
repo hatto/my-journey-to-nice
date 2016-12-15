@@ -8,7 +8,7 @@
     text-align: center;
 }
 .timer__title {
-    font-size: 2.5vw;
+    @include responsive(font-size, 2.5vw, 4vw, 7vw);
     font-weight: 900;
     text-transform: uppercase;
     strong {
@@ -17,11 +17,11 @@
 }
 .timer__logo {
     display: inline-block;
-    width: 20vw;
+    @include responsive(width, 20vw, 35vw, 60vw);
 }
 .timer__clock {
     margin-top: 2vh;
-    font-size: 2vw;
+    @include responsive(font-size, 2vw, 2.5vw, 3vw);
     strong {
         font-size: 3em;
     }

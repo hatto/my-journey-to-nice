@@ -1,6 +1,6 @@
 .header {
     position: relative;
-    padding-top: 56.25%;
+    @include responsive(padding-top, 56.25%, 80%, 100%);
     background: image-url('bgr.jpg') no-repeat center center / cover;
     color: colors(white);
     font-weight: bold;
@@ -12,9 +12,9 @@
 .header__links {
     margin-top: 5vh;
     &-item {
-        height: 5vh;
+        @include responsive(height, 5vh, 3vw, 5vw);
         display: inline-block;
-        margin: 0 1vw;
+        @include responsive(margin, 0 1vw, 0 2vw, 0 2vw);
     }
     img {
         display: block;
