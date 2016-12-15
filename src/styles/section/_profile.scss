@@ -1,10 +1,13 @@
 .profile {
-    display: inline-block;
-    vertical-align: middle;
+    @include responsive(float, left, null, null);
+    display: block;
     width: 120px;
     margin-right: 5vw;
     margin-bottom: 2vw;
     text-align: center;
+    @include respond($max: breakpoints(medium)) {
+        margin: 2vw auto;
+    }
 }
 .profile__image {
     border-radius: 50%;

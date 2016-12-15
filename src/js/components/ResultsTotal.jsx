@@ -215,12 +215,19 @@ var ResultsTotal = React.createClass({
         startDate: newEndDate
       });
       this.setState(getStateFromStores(newStartDate, newEndDate));
+
+      ReactGA.event({
+        category: 'week',
+        action: 'change date',
+        label: newStartDate + " " + newEndDate
+      });
     },
 
     render: function() {
         let days = moment().diff(moment(this.state.startDate), 'days'),
             title = (this.props.type === "all") ? "Until today." : "My week.",
-            pagination = (this.props.type === "all") ? null : this.addPagination()
+            pagination = (this.props.type === "all") ? null : this.addPagination(),
+            profile = (this.props.type === "all") ? <Profile/> : null
             ;
 
         days = (days < 1) ? 0 : days;
@@ -229,6 +236,8 @@ var ResultsTotal = React.createClass({
             <div className="wrap">
               <div className="results-total">
                   <div className="results-total__intro">
+
+                    { profile }
 
                     <div className="results-intro__description">
                       <div className="results-intro__title">{ title }</div>

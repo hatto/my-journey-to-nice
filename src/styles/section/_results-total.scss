@@ -148,11 +148,11 @@
     }
 }
 .pagination {
-    position: absolute;
-    top: 0;
-    right: 0;
+    @include responsive(position, absolute, absolute, relative);
+    @include responsive(top, 0, 0, auto);
+    @include responsive(right, 0, 0, auto);
     padding: 1vw 0;
-    @include responsive(font-size, 1vw, 20px, 18px);
+    @include responsive(font-size, 1vw, 18px, 16px);
     &__date {
         display: inline-block;
         vertical-align: middle;
@@ -162,7 +162,7 @@
     &__arrow {
         display: inline-block;
         vertical-align: middle;
-        margin-left: 0.5vw;
+        @include responsive(margin-left, 0.5vw, 1vw, 2vw);
         padding: 0;
         font-size: 0;
         line-height: 0;
