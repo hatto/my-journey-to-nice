@@ -224,13 +224,16 @@ var ResultsTotal = React.createClass({
     },
 
     render: function() {
-        let days = moment(his.state.endDate).diff(moment(this.state.startDate), 'days'),
+        let
+            maxDate = (moment().isBefore(this.state.endDate)) ? moment() : moment(this.state.endDate),
+            days = maxDate.diff(moment(this.state.startDate), 'days') + 1,
             title = (this.props.type === "all") ? "Until today." : "My week.",
             pagination = (this.props.type === "all") ? null : this.addPagination(),
             profile = (this.props.type === "all") ? <Profile/> : null
             ;
 
         days = (days < 1) ? 0 : days;
+
 
         return (
             <div className="wrap">
