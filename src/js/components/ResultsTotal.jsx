@@ -224,7 +224,7 @@ var ResultsTotal = React.createClass({
     },
 
     render: function() {
-        let days = moment().diff(moment(this.state.startDate), 'days'),
+        let days = moment(his.state.endDate).diff(moment(this.state.startDate), 'days'),
             title = (this.props.type === "all") ? "Until today." : "My week.",
             pagination = (this.props.type === "all") ? null : this.addPagination(),
             profile = (this.props.type === "all") ? <Profile/> : null
