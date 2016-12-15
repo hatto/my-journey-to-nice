@@ -39,7 +39,7 @@ var Timer = React.createClass({
                     <strong>{ days }</strong>{daysLabel}
                 </span>
                 <span className="timer__clock-hours">
-                    <strong>{hours}:{minutes}</strong>:{seconds}
+                    <strong>{hours}:{minutes}</strong>{seconds}
                 </span>
             </div>
         );
