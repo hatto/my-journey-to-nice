@@ -8,5 +8,6 @@ module.exports = keyMirror({
   FETCH_PROFILE_SUCCESS:    null,
   FETCH_PROFILE_ERROR:      null,
   GMAP_LOADED:              null,
-  FETCHED_ACTIVITY:         null
+  FETCHED_ACTIVITY:         null,
+  CHANGE_DATES:             null
 });

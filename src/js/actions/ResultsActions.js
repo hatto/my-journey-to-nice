@@ -28,6 +28,16 @@ var ResultsActions = {
         AppDispatcher.dispatch({
             type: Constants.GMAP_LOADED
         });
+    },
+
+    changeDates: function(newStartDate, newEndDate) {
+      AppDispatcher.dispatch({
+          type: Constants.CHANGE_DATES,
+          value: {
+            start: newStartDate,
+            end: newEndDate
+          }
+      });
     }
 
 };

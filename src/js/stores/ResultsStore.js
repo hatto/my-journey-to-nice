@@ -124,8 +124,10 @@ var ResultsStore = assign({}, EventEmitter.prototype, {
             sports = getSports(allActivities)
             ;
         return {
-            sports: sports,
-            all: allActivities
+            sports:     sports,
+            all:        allActivities,
+            startDate:  startDate,
+            endDate:    endDate
         };
     },
 
@@ -192,6 +194,19 @@ AppDispatcher.register(function(action) {
 
         case Constants.FETCHED_ACTIVITY:
           mapActivity = action.value;
+          ResultsStore.emitChange();
+          break;
+
+          ResultsStore.emitChange();
+          break;
+
+        case Constants.CHANGE_DATES:
+          app.data.currentMin = action.value.start;
+          app.data.currentMax = action.value.end;
+
+          ResultsStore.emitChange();
+          break;
+
           ResultsStore.emitChange();
           break;
 

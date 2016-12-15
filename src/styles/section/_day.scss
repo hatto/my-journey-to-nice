@@ -125,7 +125,7 @@
     line-height: 1;
     color: colors(white);
     background: colors(red_a);
-    @include responsive(font-size, 2vw, 20px, 26px);
+    @include responsive(font-size, 1.5vw, 20px, 26px);
     text-transform: uppercase;
 }
 .sport__name {

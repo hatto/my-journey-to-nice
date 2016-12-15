@@ -5,9 +5,11 @@ import lodash       from 'lodash';
 import Waypoint     from 'react-waypoint';
 import ReactGA      from 'react-ga';
 
-import ResultsStore from '../stores/ResultsStore';
-import Profile      from './Profile.jsx';
-import Format       from '../utils/Format';
+import ResultsStore   from '../stores/ResultsStore';
+import ResultsActions from '../actions/ResultsActions';
+
+import Profile        from './Profile.jsx';
+import Format         from '../utils/Format';
 
 var totalDuration = 0;
 var sentEvent = false;
@@ -42,7 +44,7 @@ var ResultsTotal = React.createClass({
      * Event handler for 'change' events coming from the MessageStore
      */
     _onChange: function() {
-        this.setState(getStateFromStores(this.props.startDate, this.props.endDate));
+        this.setState(getStateFromStores(this.state.startDate, this.state.endDate));
     },
 
     infoDistance: function(distance) {
@@ -192,10 +194,36 @@ var ResultsTotal = React.createClass({
         }
     },
 
+    addPagination: function() {
+      let dateText = moment(this.state.startDate).format('DD/MM/YYYY') + " - " + moment(this.state.endDate).format('DD/MM/YYYY')
+          ;
+
+      return (
+          <div className="pagination">
+              <div className="pagination__date">{ dateText }</div>
+              <button className="pagination__arrow pagination__arrow--prev" onClick={ () => { this.week(-1) } } >previous</button>
+              <button className="pagination__arrow pagination__arrow--next" onClick={ () => { this.week(1) } } >next</button>
+          </div>
+      );
+    },
+
+    week: function(changeInt) {
+      let newStartDate = moment(this.state.startDate).add((7*changeInt), 'days').format("YYYY-MM-DD");
+      let newEndDate = moment(this.state.endDate).add((7*changeInt), 'days').format("YYYY-MM-DD");
+      this.setState({
+        startDate: newStartDate,
+        startDate: newEndDate
+      });
+      this.setState(getStateFromStores(newStartDate, newEndDate));
+    },
+
     render: function() {
-        let days = moment().diff(moment(this.props.startDate), 'days'),
-            title = (this.props.type === "all") ? "Until today." : "My week."
+        let days = moment().diff(moment(this.state.startDate), 'days'),
+            title = (this.props.type === "all") ? "Until today." : "My week.",
+            pagination = (this.props.type === "all") ? null : this.addPagination()
             ;
+
+        days = (days < 1) ? 0 : days;
 
         return (
             <div className="wrap">
@@ -204,6 +232,9 @@ var ResultsTotal = React.createClass({
 
                     <div className="results-intro__description">
                       <div className="results-intro__title">{ title }</div>
+
+                      { pagination }
+
                       <div className="results-intro__stats">
                         <div className="results-intro__stats-col">
                           <div><span>Total days:</span><strong>{ days }</strong></div>

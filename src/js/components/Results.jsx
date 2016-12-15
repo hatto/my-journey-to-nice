@@ -18,24 +18,24 @@ var Results = React.createClass({
     },
 
     componentDidMount: function() {
-        ResultsStore.addChangeListener(this._onChange);
+        // ResultsStore.addChangeListener(this._onChange);
         ResultsStore.getResults();
     },
 
-    /**
-     * clean component before unmount
-     * @return null
-     */
-    componentWillUnmount: function() {
-        ResultsStore.removeChangeListener(this._onChange);
-    },
-
-    /**
-     * Event handler for 'change' events coming from the MessageStore
-     */
-    _onChange: function() {
-        this.setState(getStateFromStores());
-    },
+    // /**
+    //  * clean component before unmount
+    //  * @return null
+    //  */
+    // componentWillUnmount: function() {
+    //     ResultsStore.removeChangeListener(this._onChange);
+    // },
+    //
+    // /**
+    //  * Event handler for 'change' events coming from the MessageStore
+    //  */
+    // _onChange: function() {
+    //     this.setState(getStateFromStores());
+    // },
 
     addPagination: function() {
         return (
@@ -44,14 +44,6 @@ var Results = React.createClass({
                 <button className="pagination__arrow pagination__arrow--next" onClick={ () => { this.week(1) } } >next</button>
             </div>
         );
-    },
-
-    week: function(changeInt) {
-
-        this.setState({
-            currentMin: this.state.currentMin.add((7*changeInt), 'days'),
-            currentMax: this.state.currentMax.add((7*changeInt), 'days')
-        });
     },
 
     render: function() {
