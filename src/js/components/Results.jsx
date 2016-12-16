@@ -37,19 +37,11 @@ var Results = React.createClass({
     //     this.setState(getStateFromStores());
     // },
 
-    addPagination: function() {
-        return (
-            <div className="pagination">
-                <button className="pagination__arrow pagination__arrow--prev" onClick={ () => { this.week(-1) } } >previous</button>
-                <button className="pagination__arrow pagination__arrow--next" onClick={ () => { this.week(1) } } >next</button>
-            </div>
-        );
-    },
 
     render: function() {
         let dates = this.state;
 
-        let map = (this.state.data && this.state.data.length) ? <Map /> : null;
+        let map = (this.state.data) ? <Map /> : null;
         return (
             <div className="results">
                 <ResultsTotal startDate={ this.state.dates.min.format("YYYY-MM-DD") } endDate={ this.state.dates.max.format("YYYY-MM-DD") } profile={ true } type={ "all" } />

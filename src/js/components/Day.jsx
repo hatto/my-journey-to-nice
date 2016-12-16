@@ -69,14 +69,14 @@ var Day = React.createClass({
         return null;
     },
 
-    getSportInfoRow: function(info, label) {
+    getSportInfoRow: function(info, label, unit) {
         if (info == null || info == 0) {
             return null;
         }
         return (
             <div className="sport__info">
                 <span className='sport__info-label'>{ label }:</span>
-                <span className='sport__info-value'>{ info }</span>
+                <span className='sport__info-value'>{ info }{ unit || "" }</span>
             </div>
         );
     },
@@ -101,10 +101,10 @@ var Day = React.createClass({
                     </div>
                     <div className="sport__description">{ sport.description }</div>
                     { this.getSportInfoRow(time, 'Time') }
-                    { this.getSportInfoRow(distance, 'Distance') }
-                    { this.getSportInfoRow(speed, 'Speed') }
-                    { this.getSportInfoRow(sport.average_watts, 'Watts') }
-                    { this.getSportInfoRow(sport.elev_height, 'Elevation') }
+                    { this.getSportInfoRow(distance, 'Distance', 'km') }
+                    { this.getSportInfoRow(speed, 'Speed', 'km/h') }
+                    { this.getSportInfoRow(sport.average_watts, 'Watts', 'watts') }
+                    { this.getSportInfoRow(sport.elev_height, 'Elevation', 'm') }
                     <a  className="sport__link" target="_blank" href={ url }>+ details</a>
                 </div>
             </div>

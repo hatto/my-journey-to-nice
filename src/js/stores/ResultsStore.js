@@ -181,7 +181,10 @@ AppDispatcher.register(function(action) {
 
         case Constants.API_SUCCESS:
           storeData(action.value);
-
+          let lastactivity = getLastWithMap();
+          if (lastactivity) {
+            StravaApi.getActivity(lastactivity.id);
+          }
           ResultsStore.emitChange();
           break;
 
