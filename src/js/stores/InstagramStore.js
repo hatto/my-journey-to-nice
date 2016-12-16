@@ -15,7 +15,8 @@ function filterPhotos(photos) {
     let selected = [];
     if (photos.length) {
         for (let item of photos) {
-            if (item.caption && item.caption.text.indexOf('myjourneytoironman') > -1) {
+            if (item.caption && item.caption.text.indexOf('#myjourneytoironman') > -1) {
+                
                 selected.push(item);
             }
         }
