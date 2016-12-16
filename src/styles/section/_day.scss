@@ -116,12 +116,10 @@
     }
 }
 .sport__header {
-    margin-bottom: 1vw;
     display: inline-block;
     @include responsive(padding, 0.5vw 2vw, 1vw 3vw, 1.5vw 4vw);
     @include responsive(margin-left, -1vw, -2vw, -4vw);
-    margin-top: 1vw;
-    @include responsive(margin-bottom, 1.5vw, 2vw, 3vw);
+    @include responsive(margin-bottom, 0.5vw, 2vw, 3vw);
     line-height: 1;
     color: colors(white);
     background: colors(red_a);
