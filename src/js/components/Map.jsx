@@ -113,6 +113,8 @@ var Map = React.createClass({
 
     render: function() {
         if (this.state) {
+            let typeClass = (this.state.type) ? 'map__activity--' + this.state.type.toLowerCase() : '';
+            let cls = classNames('map__activity', typeClass);
             return (
                 <div className="wrap">
                     <Waypoint
@@ -120,6 +122,10 @@ var Map = React.createClass({
                     />
                     <div className="map__title">Last route.</div>
                     <div className="map">
+                        <div className={ cls }>
+                            <span className="map__activity-name">{ this.state.name }</span>
+                            <span className="map__activity-info">{ Math.round(this.state.distance / 1000) }km</span>
+                        </div>
                         <div id="map" className="map__placeholder"></div>
                         { this.showPhoto() }
                     </div>

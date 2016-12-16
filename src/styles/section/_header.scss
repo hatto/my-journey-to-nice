@@ -11,10 +11,19 @@
 }
 .header__links {
     margin-top: 5vh;
+    &:hover {
+        .header__links-item {
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
     &-item {
         @include responsive(height, 5vh, 3vw, 5vw);
         display: inline-block;
         @include responsive(margin, 0 1vw, 0 2vw, 0 2vw);
+        transition: opacity 0.5s ease;
     }
     img {
         display: block;

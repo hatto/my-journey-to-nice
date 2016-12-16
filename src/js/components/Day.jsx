@@ -104,7 +104,7 @@ var Day = React.createClass({
                     { this.getSportInfoRow(distance, 'Distance', 'km') }
                     { this.getSportInfoRow(speed, 'Speed', 'km/h') }
                     { this.getSportInfoRow(sport.average_watts, 'Watts', 'watts') }
-                    { this.getSportInfoRow(sport.elev_height, 'Elevation', 'm') }
+                    { this.getSportInfoRow(sport.total_elevation_gain, 'Elevation', 'm') }
                     <a  className="sport__link" target="_blank" href={ url }>+ details</a>
                 </div>
             </div>

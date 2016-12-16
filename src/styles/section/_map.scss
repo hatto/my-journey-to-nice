@@ -22,3 +22,44 @@
         width: auto;
     }
 }
+.map__activity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: colors(red_a);
+    padding: 1vh 2vw;
+    @include responsive(font-size, 1vw, 15px, 13px);
+    text-transform: uppercase;
+    color: colors(white);
+    z-index: 10;
+    overflow: hidden;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: -2%;
+        left: -2%;
+        width: 50%;
+        height: 100%;
+        opacity: 0.15;
+    }
+    &--virtualride {
+        &:before {
+            background: image-url('sport_bike.svg') no-repeat left bottom / contain;
+        }
+    }
+    &--ride {
+        &:before {
+            background: image-url('sport_bike.svg') no-repeat left bottom / contain;
+        }
+    }
+    &--run {
+        &:before {
+            background: image-url('sport_run.svg') no-repeat left bottom / contain;
+        }
+    }
+    &-name {
+        position: relative;
+        font-size: 1.5em;
+        margin-right: 1vw;
+    }
+}

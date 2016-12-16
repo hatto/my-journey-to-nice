@@ -12,6 +12,16 @@ var Format = class {
         return Math.round(distance/10, 2)/100;
     }
 
+    getTotalElevation(activities) {
+        let elevation = 0;
+        if (activities.length) {
+          for (let item of activities) {
+              elevation += item.total_elevation_gain;
+          }
+        }
+        return elevation;
+    }
+
     getTotalTime(activities) {
         let time = 0;
         if (activities.length) {

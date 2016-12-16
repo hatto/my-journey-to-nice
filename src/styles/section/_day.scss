@@ -144,6 +144,10 @@
     text-transform: uppercase;
     background: colors(black);
     color: colors(white);
+    transition: background-color 0.5s ease;
+    &:hover {
+        background-color: colors(red_a);
+    }
 }
 .sport__info {
     font-size: 0;

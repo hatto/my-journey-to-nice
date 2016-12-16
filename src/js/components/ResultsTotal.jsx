@@ -59,6 +59,18 @@ var ResultsTotal = React.createClass({
       return null;
     },
 
+    infoElevation: function(elevation) {
+      if (elevation > 0) {
+        return (
+            <div className="sport-total__elevation">
+                <span className="sport-total__label">elevation:</span>
+                <span className="sport-total__value">{ elevation }m</span>
+            </div>
+        );
+      }
+      return null;
+    },
+
     infoListTypes: function(activities) {
       let types = [],
           rows = []
@@ -122,6 +134,7 @@ var ResultsTotal = React.createClass({
                             <span className="sport-total__value">{ time }</span>
                         </div>
                         { this.infoDistance(Format.getTotalDistance(activities)) }
+                        { this.infoElevation(Format.getTotalElevation(activities)) }
                         <div className="sport-total__graph">
                           <div className="sport-total__graph-cursor" style={ style } >
                             <span className="sport-total__graph-text">{ sport.percentage }%</span>
