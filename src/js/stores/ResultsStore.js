@@ -76,7 +76,7 @@ function filterByDate(activities, startDate, endDate) {
     if (activities.length) {
         for (let item of activities) {
             let dt = moment(item.start_date);
-            if (dt.isBetween(startDate, endDate, null, '[]')) {
+            if (dt.isBetween(startDate, endDate, 'day', '[]')) {
                 newArr.push(item);
             }
         }
