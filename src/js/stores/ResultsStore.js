@@ -71,12 +71,14 @@ function getSports(activities) {
 }
 
 function filterByDate(activities, startDate, endDate) {
-    let newArr = []
+    let newArr = [],
+        endDateMoment = moment(endDate).add(1, 'days')
         ;
+
     if (activities.length) {
         for (let item of activities) {
             let dt = moment(item.start_date);
-            if (dt.isBetween(startDate, endDate, 'day', '[]')) {
+            if (dt.isBetween(startDate, endDateMoment, 'day', '[)')) {
                 newArr.push(item);
             }
         }
