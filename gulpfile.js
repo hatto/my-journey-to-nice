@@ -93,12 +93,11 @@ gulp.task('css', ['fontCopy'], function () {
             outputStyle: 'expanded'
         }).on('error', sass.logError))
         // this will only autoprefix & merge media queries in production
-        .pipe(prod(postcss([
+        .pipe(postcss([
            autoprefixer({ browsers: ['last 2 version'] }),
            mqpacker({ sort: true }),
-        ])))
-        .pipe(prod(cssnano({ safe: true })))
-        .pipe(dev(sourcemaps.write()))
+        ]))
+        .pipe(cssnano({ safe: true }))
         .pipe(gulp.dest('styles', { cwd: distDir }))
         // .pipe(browserSync.stream())
         ;
