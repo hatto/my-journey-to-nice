@@ -19,7 +19,7 @@ var Format = class {
               elevation += item.total_elevation_gain;
           }
         }
-        return elevation;
+        return Math.round(elevation);
     }
 
     getTotalTime(activities) {
