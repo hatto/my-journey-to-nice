@@ -59,6 +59,23 @@ var Day = React.createClass({
     showPhoto: function() {
         let photo = this.state.photo;
         if (photo) {
+            if (photo.type == 'video') {
+                return (
+                    <div className="day-photo">
+                        <video
+                            className="day-photo__img"
+                            poster={ photo.images.standard_resolution.url }
+                            width={ photo.videos.low_resolution.width }
+                            height={ photo.videos.low_resolution.height }
+                            loop="true"
+                            autoPlay="true"
+                        >
+                            <source src={ photo.videos.low_resolution.url } type="video/mp4"/>
+                        </video>
+                        { this.getCaption(photo) }
+                    </div>
+                );
+            }
             return (
                 <div className="day-photo">
                     <img className="day-photo__img" src={ photo.images.standard_resolution.url } />

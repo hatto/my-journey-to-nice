@@ -143,12 +143,16 @@
     top: 0;
     left: 0;
     bottom: 0;
-    img {
+    transition: transform 0.5s ease;
+    img, video {
         display: block;
         max-width: 100%;
         max-height: 100%;
         width: auto;
         height: auto;
+    }
+    .instagram-post:hover & {
+        transform: scale(1.03);
     }
 }
 .instagram-post__content {
@@ -161,6 +165,7 @@
     line-height: 1.6;
     background: colors(white);
     overflow: hidden;
+    color: colors(black);
     &-text {
         position: absolute;
         top: 50%;

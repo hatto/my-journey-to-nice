@@ -46,6 +46,33 @@ var InstagramPost = React.createClass({
         });
     },
 
+    getMedia: function(photo) {
+        if (photo.type == "video") {
+            return (
+                <div className="instagram-post__image instagram-post__image--video">
+                    <video
+                        poster={ photo.images.standard_resolution.url }
+                        width={ photo.videos.low_resolution.width }
+                        height={ photo.videos.low_resolution.height }
+                        loop="true"
+                        autoPlay="true"
+                    >
+                        <source src={ photo.videos.low_resolution.url } type="video/mp4"/>
+                    </video>
+                </div>
+            );
+        }
+        return (
+            <div className="instagram-post__image">
+                <img
+                    src={ photo.images.standard_resolution.url }
+                    width={ photo.images.standard_resolution.width }
+                    height={ photo.images.standard_resolution.height }
+                />
+            </div>
+        );
+    },
+
     render: function() {
         let photo = this.props.data,
             cls = classNames({
@@ -55,21 +82,16 @@ var InstagramPost = React.createClass({
             ;
 
         return (
-            <div className={ cls }>
+            <a href={ photo.link } target="_blank" className={ cls }>
                 <Waypoint
                     onEnter={this._handleWaypointEnter}
                 />
-                <div className="instagram-post__image">
-                    <img
-                        src={ photo.images.standard_resolution.url }
-                        width={ photo.images.standard_resolution.width }
-                        height={ photo.images.standard_resolution.height }
-                    />
-                </div>
+                { this.getMedia(photo) }
+
                 <div className="instagram-post__content">
                     { this.getCaption(photo) }
                 </div>
-            </div>
+            </a>
         );
     }
 });

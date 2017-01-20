@@ -16,7 +16,7 @@ function filterPhotos(photos) {
     if (photos.length) {
         for (let item of photos) {
             if (item.caption && item.caption.text.indexOf('#myjourneytoironman') > -1) {
-                
+
                 selected.push(item);
             }
         }
@@ -32,7 +32,7 @@ var InstagramStore = assign({}, EventEmitter.prototype, {
     },
 
     getPhotos: function() {
-        console.log('store: get photos');
+        // console.log('store: get photos');
         InstagramApi.getPhotos();
     },
 
