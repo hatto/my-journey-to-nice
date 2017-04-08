@@ -9,26 +9,39 @@ var StravaApi = class {
       this.api = vars.strava;
     }
 
-    getData() {
-      axios.get(this.api.url+'athlete/activities', {
+    callApi(page: 1) {
+      return axios.get(this.api.url+'athlete/activities', {
         params: {
           access_token: this.api.accessToken,
           after: moment("2016-11-28").unix(),
-          per_page: 200
+          per_page: 200,
+          page: page
         }
       })
-      .then(function (response) {
-          // console.log(response);
-          ResultsActions.success(response.data);
-      })
-      .catch(function (response) {
-        console.log('error');
-        console.log(response);
-        // ResultsActions.receivedAPIError({
-        //   response: 'some error message'
-        // });
-      })
-      ;
+    }
+
+    getData() {
+      let datas = [];
+      let firstData = this.callApi(1);
+      let secontData = this.callApi(2);
+
+      Promise.all([firstData, secontData])
+        .then(response => {
+          // merge arrays
+          response.map( (item, index) => {
+            datas = datas.concat(item.data);
+          });
+          ResultsActions.success(datas);
+        })
+        .catch(response => {
+          console.log('error');
+          console.log(response);
+          // ResultsActions.receivedAPIError({
+          //   response: 'some error message'
+          // });
+        })
+        ;
+
     }
 
     getActivity(id) {
