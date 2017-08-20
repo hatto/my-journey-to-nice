@@ -19,7 +19,7 @@ var app = {
   sports: {},
   dates: {
     min: moment("2016-11-28"),
-    max: moment("2017-07-22"),
+    max: moment("2018-07-22"),
     currentMin: moment().day(1),
     currentMax: moment().day(7)
   }

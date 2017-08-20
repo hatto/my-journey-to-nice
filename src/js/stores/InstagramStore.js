@@ -13,6 +13,7 @@ var app = {
 
 function filterPhotos(photos) {
     let selected = [];
+    console.log(photos);
     if (photos.length) {
         for (let item of photos) {
             if (item.caption && item.caption.text.indexOf('#myjourneytoironman') > -1) {

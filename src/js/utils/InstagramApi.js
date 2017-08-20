@@ -20,7 +20,11 @@ var InstagramApi = class {
           count: 100
         },
         success: function(response){
-          InstagramActions.success(response.data);
+          if (response.data) {
+            InstagramActions.success(response.data);
+          } else {
+            console.error(response);
+          }
         }
       });
     }

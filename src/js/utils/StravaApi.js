@@ -23,9 +23,10 @@ var StravaApi = class {
     getData() {
       let datas = [];
       let firstData = this.callApi(1);
-      let secontData = this.callApi(2);
+      let secondData = this.callApi(2);
+      let thirdData = this.callApi(3);
 
-      Promise.all([firstData, secontData])
+      Promise.all([firstData, secondData, thirdData])
         .then(response => {
           // merge arrays
           response.map( (item, index) => {
