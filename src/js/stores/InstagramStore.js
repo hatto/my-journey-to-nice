@@ -13,13 +13,11 @@ var app = {
 
 function filterPhotos(photos) {
     let selected = [];
-    console.log(photos);
     if (photos.length) {
         for (let item of photos) {
-            if (item.caption && item.caption.text.indexOf('#myjourneytoironman') > -1) {
-
+            // if (item.caption && item.caption.text.indexOf('#myjourneytoironman') > -1) {
                 selected.push(item);
-            }
+            // }
         }
     }
     return selected;
@@ -67,7 +65,6 @@ AppDispatcher.register(function(action) {
 
         case Constants.FETCH_PHOTOS_SUCCESS:
           app.photos = filterPhotos(action.value);
-
           InstagramStore.emitChange();
           break;
 
