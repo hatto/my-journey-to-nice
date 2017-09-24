@@ -77,7 +77,6 @@ var Day = React.createClass({
                         >
                             <source src={ photo.videos.low_resolution.url } type="video/mp4"/>
                         </video>
-                        { this.getCaption(photo) }
                     </div>
                 );
             }

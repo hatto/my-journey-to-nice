@@ -31,14 +31,15 @@ var InstagramPost = React.createClass({
 
     getCaption: function(photo) {
         if (photo.caption) {
+            let photoText = this.removeHastTags(photo.caption.text);
             let cls = classNames({
                 'instagram-post__content-text': true,
-                'instagram-post__content-text--small': photo.caption.text.length > 150
+                'instagram-post__content-text--small': photoText.length > 150
             });
             return (
                 <div
                     className={ cls }
-                    dangerouslySetInnerHTML={{ __html: this.highlightHashtags(this.removeHastTags(photo.caption.text)) }}
+                    dangerouslySetInnerHTML={{ __html: this.highlightHashtags(photoText) }}
                 />
             );
         }
