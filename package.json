@@ -37,7 +37,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-postcss": "^6.1.1",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.1",
+    "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-submodule": "^0.1.3",
     "gulp-svgstore": "^6.0.0",
@@ -83,7 +83,7 @@
   },
   "instagram": {
     "url": "https://api.instagram.com/v1/",
-    "accessToken": "270815471.b794646.d88f717f1b7848dfa6bade6a25ca09b8"
+    "accessToken": "270815471.b794646.56bc9398202c47119958b16a71d85c0a"
   },
   "googlemaps": {
     "apikey": "AIzaSyD7mNv7GRAObXb4m3fIgVYvVXw9ruVio94"

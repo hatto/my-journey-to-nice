@@ -15,6 +15,11 @@ var InstagramPost = React.createClass({
         };
     },
 
+    removeHastTags: function(text) {
+        let textSplit = text.split(/[.]*[\r\n|\r|\n][.][\r\n|\r|\n][.][\r\n|\r|\n]/g);
+        return textSplit[0];
+    },
+
     highlightHashtags: function(text) {
         return this.nl2br(text.replace(/(^|\s)(#[a-z\d-]+)/ig, "$1<strong>$2</strong>"));
     },
@@ -33,7 +38,7 @@ var InstagramPost = React.createClass({
             return (
                 <div
                     className={ cls }
-                    dangerouslySetInnerHTML={{ __html: this.highlightHashtags(photo.caption.text) }}
+                    dangerouslySetInnerHTML={{ __html: this.highlightHashtags(this.removeHastTags(photo.caption.text)) }}
                 />
             );
         }

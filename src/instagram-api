@@ -5,5 +5,5 @@ curl \-F 'client_id=b7946462f67b44acbd52763594de8f3f' \
     -F 'client_secret=266f3dd0026c4e44be692dd60f3e239c' \
     -F 'grant_type=authorization_code' \
     -F 'redirect_uri=http://localhost' \
-    -F 'code=28d069b8122a4378818d0797dc8863bd' \
+    -F 'code=5c46e363d5424a418563f5e5aa780245' \
     https://api.instagram.com/oauth/access_token

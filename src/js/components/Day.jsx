@@ -45,11 +45,16 @@ var Day = React.createClass({
         this.setState(getStateFromStores());
     },
 
+    removeHastTags: function(text) {
+        let textSplit = text.split(/[.]*[\r\n|\r|\n][.][\r\n|\r|\n][.][\r\n|\r|\n]/g);
+        return textSplit[0];
+    },
+
     getCaption: function(photo) {
         if (photo.caption) {
             return (
                 <div className="day-photo__text">
-                    { photo.caption.text }
+                    { this.removeHastTags(photo.caption.text) }
                 </div>
             );
         }
@@ -79,7 +84,6 @@ var Day = React.createClass({
             return (
                 <div className="day-photo">
                     <img className="day-photo__img" src={ photo.images.standard_resolution.url } />
-                    { this.getCaption(photo) }
                 </div>
             );
         }
