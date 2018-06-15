@@ -13,7 +13,7 @@ var StravaApi = class {
       return axios.get(this.api.url+'athlete/activities', {
         params: {
           access_token: this.api.accessToken,
-          after: moment("2016-11-28").unix(),
+          after: moment("2017-12-31").unix(),
           per_page: 200,
           page: page
         }

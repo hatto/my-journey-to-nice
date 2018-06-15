@@ -10,16 +10,16 @@ import StravaApi                from '../utils/StravaApi';
 
 const EventEmitter = require('events').EventEmitter;
 
-const minDate = "2016-11-28",
-    maxDate = "2017-07-22"
+const minDate = "2017-12-31",
+    maxDate = "2018-08-27"
     ;
 
 var app = {
   data: {},
   sports: {},
   dates: {
-    min: moment("2016-11-28"),
-    max: moment("2018-07-22"),
+    min: moment("2017-12-31"),
+    max: moment("2018-08-27"),
     currentMin: moment().day(-6),
     currentMax: moment().day(0)
   }
